@@ -10,13 +10,11 @@ import 'css/index.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router } from 'react-router-dom'
-// import Home from './components/Home'
+import Root from './components/Root'
 
 ReactDOM.render(
   <div>
-    <div>React guidon</div>
-    <Router></Router>
+    <Root></Root>
   </div>,
   document.getElementById('root')
 )
