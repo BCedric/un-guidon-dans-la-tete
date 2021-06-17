@@ -6,11 +6,12 @@ import { getPages } from 'store/pages/pagesSlice'
 
 import Page from './Page'
 
-const Router = () => {
+const Router = (props) => {
   const pages = useSelector(getPages)
 
   return (
     <HashRouter>
+      {props.children}
       <Switch>
         {pages.map((page, index) => (
           <Route

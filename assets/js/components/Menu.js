@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
 
-import Http from 'services/Http'
-
-import { pageApi } from 'constants/api-const'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { getPages } from 'store/pages/pagesSlice'
 
 const Menu = () => {
+  const pages = useSelector(getPages)
   const [tags, setTags] = useState([])
 
   useEffect(() => {
-    Http.get(pageApi.tags()).then((res) => setTags(res))
+    setTags(pages.map((page) => page.tag))
   }, [])
 
   return (
     <nav>
       <ul>
         {tags.map((tag, index) => (
-          <li key={index}>{tag}</li>
+          <li key={index}>
+            <Link to={`/${tag}`}>{tag}</Link>
+          </li>
         ))}
       </ul>
     </nav>

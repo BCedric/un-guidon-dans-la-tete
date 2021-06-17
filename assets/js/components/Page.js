@@ -11,10 +11,6 @@ const Page = ({ tag }) => {
     setPage(pagesFilter(tag))
   }, [])
 
-  useEffect(() => {
-    console.log(page)
-  }, [page])
-
   return (
     <div>
       {page != null && (

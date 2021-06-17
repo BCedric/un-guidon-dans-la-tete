@@ -20,8 +20,9 @@ const Root = () => {
     <div>
       {hasFetchPages && !isLoadingPages && (
         <div>
-          <Header></Header>
-          <Router />
+          <Router>
+            <Header></Header>
+          </Router>
         </div>
       )}
     </div>
