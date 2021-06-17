@@ -1,26 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Header from './Header'
 
-import routes from 'constants/routes-const'
+import { fetchPages } from 'store/pages/pagesSlice'
+import Router from './Router'
 
 const Root = () => {
+  const dispatch = useDispatch()
+  const isLoadingPages = useSelector((state) => state.pages.isLoading)
+  const hasFetchPages = useSelector((state) => state.pages.hasFetch)
+
+  useEffect(() => {
+    fetchPages(dispatch)
+  }, [])
+
   return (
     <div>
-      <Header></Header>
-      <Router>
-        <Switch>
-          {routes.map((route, index) => (
-            <Route
-              exact
-              key={index}
-              path={route.path}
-              component={route.component}
-            ></Route>
-          ))}
-        </Switch>
-      </Router>
+      {hasFetchPages && !isLoadingPages && (
+        <div>
+          <Header></Header>
+          <Router />
+        </div>
+      )}
     </div>
   )
 }

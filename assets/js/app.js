@@ -10,11 +10,17 @@ import 'css/index.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+
+import store from 'store/store'
+
 import Root from './components/Root'
 
 ReactDOM.render(
   <div>
-    <Root></Root>
+    <Provider store={store}>
+      <Root></Root>
+    </Provider>
   </div>,
   document.getElementById('root')
 )

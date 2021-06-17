@@ -68,7 +68,8 @@ Encore
     css: path.resolve(__dirname, 'assets/css'),
     services: path.resolve(__dirname, 'assets/js/services'),
     components: path.resolve(__dirname, 'assets/js/components'),
-    constants: path.resolve(__dirname, 'assets/js/constants')
+    constants: path.resolve(__dirname, 'assets/js/constants'),
+    store: path.resolve(__dirname, 'assets/js/store')
   })
 
 // uncomment to get integrity="..." attributes on your script & link tags
