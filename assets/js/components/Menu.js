@@ -10,7 +10,7 @@ const Menu = () => {
 
   useEffect(() => {
     setTags(pages.map((page) => page.tag))
-  }, [])
+  }, [pages])
 
   return (
     <nav>
