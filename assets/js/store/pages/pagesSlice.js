@@ -36,6 +36,12 @@ export const fetchPages = (dispatch) => {
   })
 }
 
+export const postPage = (page, dispatch) =>
+  Http.post(pageApi.pages(), page).then((pages) => {
+    console.log(pages)
+    dispatch(setPages(pages))
+  })
+
 export const getPageByTag = (state) => (tag) =>
   state.pages.value.find((page) => page.tag === tag)
 
