@@ -27,6 +27,12 @@ class Page
      */
     private $content;
 
+    public function setPage(array $props)
+    {
+        $this->setContent($props['content']);
+        $this->setTag($props['tag']);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
