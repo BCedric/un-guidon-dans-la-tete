@@ -10,18 +10,28 @@ const Wysiwyg = ({ onChange = () => {}, value }) => {
 
   useEffect(() => {
     if (value != null) {
-      const draftValue = htmlToDraft(value)
-      if (draftValue) {
-        const contentState = ContentState.createFromBlockArray(
-          draftValue.contentBlocks
-        )
-        const editorState = EditorState.createWithContent(contentState)
-        setEditorState(editorState)
-      }
+      initEditor(value)
     } else {
       setEditorState(EditorState.createEmpty())
     }
+  }, [])
+
+  useEffect(() => {
+    if (value === '') {
+      initEditor(value)
+    }
   }, [value])
+
+  const initEditor = (val) => {
+    const draftValue = htmlToDraft(val)
+    if (draftValue) {
+      const contentState = ContentState.createFromBlockArray(
+        draftValue.contentBlocks
+      )
+      const editorState = EditorState.createWithContent(contentState)
+      setEditorState(editorState)
+    }
+  }
 
   const handleChange = (e) => {
     setEditorState(e)
