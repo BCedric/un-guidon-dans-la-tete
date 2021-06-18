@@ -22,8 +22,6 @@ const PageForm = () => {
 
   const submit = (e) => {
     e.preventDefault()
-    console.log(tag, content)
-
     postPage({ tag, content }, dispatch).then(() => resetForm())
   }
 
