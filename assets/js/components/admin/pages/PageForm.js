@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import useForm from 'generics/hooks/useForm'
-import Wysiwyg from 'generics/components/Wysiwyg'
-import { postPage } from 'store/pages/pagesSlice'
+import React, { useEffect } from 'react'
+
 import { useDispatch } from 'react-redux'
-import { Button, TextField } from '@material-ui/core'
+
+import { TextField } from '@material-ui/core'
+
+import useForm from 'generics/hooks/useForm'
+import CustomForm from 'generics/components/CustomForm'
+import Wysiwyg from 'generics/components/Wysiwyg'
+
+import { postPage, putPage } from 'store/pages/pagesSlice'
 
 const PageForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormValid, isFormDirty } =
@@ -11,7 +16,6 @@ const PageForm = ({ cancel, entity }) => {
 
   const [tag, setTag] = getFormField('tag', '', true)
   const [content, setContent] = getFormField('content', '')
-  const [hasInitForm, setHasInitForm] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -20,17 +24,30 @@ const PageForm = ({ cancel, entity }) => {
       tag: entity != null ? entity.tag : '',
       content: entity != null ? entity.content : ''
     })
-    setHasInitForm(true)
   }, [entity])
+
+  const closeForm = () => {
+    resetForm()
+    cancel()
+  }
 
   const submit = (e) => {
     e.preventDefault()
-    postPage({ tag, content }, dispatch).then(() => resetForm())
+    if (entity == null) {
+      postPage({ tag, content }, dispatch).then(closeForm)
+    } else {
+      putPage(entity.id, { tag, content }, dispatch).then(closeForm)
+    }
   }
 
   return (
     <>
-      <form onSubmit={submit}>
+      <CustomForm
+        onSubmit={submit}
+        onCancel={cancel}
+        isFormDirty={isFormDirty}
+        isFormValid={isFormValid}
+      >
         <TextField
           label="Tag"
           type="text"
@@ -38,15 +55,7 @@ const PageForm = ({ cancel, entity }) => {
           onChange={(e) => setTag(e.target.value)}
         />
         <Wysiwyg onChange={(val) => setContent(val)} value={content} />
-        <div className="form-buttons-container">
-          <Button variant="contained" disabled={!isFormValid}>
-            Valider
-          </Button>
-          <Button variant="contained" type="button" onClick={cancel}>
-            Annuler
-          </Button>
-        </div>
-      </form>
+      </CustomForm>
     </>
   )
 }

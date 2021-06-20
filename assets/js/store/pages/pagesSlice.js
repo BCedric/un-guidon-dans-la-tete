@@ -47,6 +47,11 @@ export const deletePage = (id, dispatch) =>
     dispatch(setPages(pages))
   })
 
+export const putPage = (id, page, dispatch) =>
+  Http.put(pageApi.page(id), page).then((pages) => {
+    dispatch(setPages(pages))
+  })
+
 export const getPageByTag = (state) => (tag) =>
   state.pages.value.find((page) => page.tag === tag)
 
