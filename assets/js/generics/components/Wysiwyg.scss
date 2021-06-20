@@ -1,0 +1,11 @@
+.wysiwyg-wrapper {
+  background-color: white;
+  border: 1px solid black;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+
+  .rdw-editor-main {
+    flex: 1;
+  }
+}

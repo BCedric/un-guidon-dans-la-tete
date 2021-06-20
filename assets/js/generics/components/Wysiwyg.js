@@ -5,24 +5,28 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
+import './Wysiwyg.scss'
+
 const Wysiwyg = ({ onChange = () => {}, value }) => {
   const [editorState, setEditorState] = useState(null)
 
   useEffect(() => {
     if (value != null) {
-      initEditor(value)
+      setValue(value)
     } else {
       setEditorState(EditorState.createEmpty())
     }
   }, [])
 
   useEffect(() => {
-    if (value === '') {
-      initEditor(value)
-    }
+    if (
+      editorState != null &&
+      value !== draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    )
+      setValue(value)
   }, [value])
 
-  const initEditor = (val) => {
+  const setValue = (val) => {
     const draftValue = htmlToDraft(val)
     if (draftValue) {
       const contentState = ContentState.createFromBlockArray(
@@ -40,7 +44,11 @@ const Wysiwyg = ({ onChange = () => {}, value }) => {
 
   return (
     <>
-      <Editor editorState={editorState} onEditorStateChange={handleChange} />
+      <Editor
+        editorState={editorState}
+        wrapperClassName="wysiwyg-wrapper"
+        onEditorStateChange={handleChange}
+      />
     </>
   )
 }
