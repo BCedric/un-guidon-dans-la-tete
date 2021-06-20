@@ -1,0 +1,97 @@
+@import '../variables.scss';
+@import './spaced-inline.scss';
+
+.form-inline {
+  @extend .spaced-inline;
+  display: inline-flex;
+  // align-items: flex-end !important;
+  padding: $littleSpace;
+  flex-wrap: nowrap;
+
+  .input-container {
+    display: flex;
+  }
+
+  input:not(.form-check-input) {
+    min-width: 100px;
+  }
+
+  &.align-end {
+    align-items: flex-end;
+  }
+
+  label {
+    justify-content: left !important;
+  }
+
+  input {
+    width: unset;
+    flex: 1;
+  }
+
+  .form-buttons-container {
+    margin: 0;
+  }
+}
+
+.sub-form {
+  > :nth-child(n) {
+    margin: $littleSpace 0;
+  }
+}
+
+form:not(.form-inline) {
+  padding: $space;
+  text-align: left;
+
+  @extend .sub-form;
+}
+
+.form-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &.align-end {
+    align-items: flex-end;
+  }
+
+  @extend .spaced-inline;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.form-card {
+  display: block;
+}
+
+.form-error {
+  display: block;
+}
+
+.form-buttons-container {
+  margin: $space 0;
+  display: flex;
+  flex: 0;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  @extend .spaced-inline;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.invalid-feedback {
+  display: block !important;
+}
+
+.button-spinner {
+  width: 1em !important;
+  height: 1em !important;
+}

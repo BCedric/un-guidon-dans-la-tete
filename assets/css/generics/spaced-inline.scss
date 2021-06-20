@@ -1,0 +1,7 @@
+@import '../variables.scss';
+
+.spaced-inline {
+  > *:not(:last-child) {
+    margin-right: $littleSpace !important;
+  }
+}
