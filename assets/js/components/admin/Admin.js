@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Pages from './pages/Pages'
+import PagesAdmin from './pages/PagesAdmin'
 
 const Admin = () => {
   return (
     <div>
-      <Pages />
+      <PagesAdmin />
     </div>
   )
 }

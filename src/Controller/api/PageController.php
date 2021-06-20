@@ -74,4 +74,34 @@ class PageController extends AbstractController
         }]));
     }
 
+    /**
+     * @Route("/{id}", name="put_page", methods={"PUT"})
+     */
+    public function updatePage(string $id, Request $request, EntityManagerInterface $em, PageRepository $pageRepository)
+    {
+        $body = json_decode($request->getContent(), true);
+        $page = $pageRepository->findOneBy(['id' => $id]);
+
+        $page->setPage($body);
+
+        $em->persist($page);
+        $em->flush();
+        return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
+            return $object->getId();
+        }]));
+    }
+
+    /**
+     * @Route("/{id}", name="delete_page", methods={"DELETE"})
+     */
+    public function deletePage(string $id, EntityManagerInterface $em, PageRepository $pageRepository)
+    {
+        $page = $pageRepository->findOneBy(['id' => $id]);
+        $em->remove($page);
+        $em->flush();
+        return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
+            return $object->getId();
+        }]));
+    }
+
 }

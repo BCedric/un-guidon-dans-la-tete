@@ -1,5 +1,5 @@
 const pageApi = {
-  page: (tag) => `/page/${tag}`,
+  page: (id) => `/page/${id}`,
   pages: () => `/page`,
   tags: () => `/page/tags`
 }

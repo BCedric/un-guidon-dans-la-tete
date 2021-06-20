@@ -38,7 +38,10 @@ const useForm = () => {
       } else {
         setModifiedFields({ ...modifiedFields, [key]: true })
       }
-      setFormFields({ ...formFields, [key]: value })
+      setFormFields((current) => {
+        current[key] = value
+        return current
+      })
     }
 
     return [formFields[key], setField, isValid]
