@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { deletePage } from 'store/pages/pagesSlice'
 import EntitiesList from './EntitiesList'
 
 const EntitiesAdmin = ({
   title,
   FormComponent,
   propertiesSelector,
-  properties
+  properties,
+  deleteEntity,
+  canEdit = true,
+  canDelete = true
 }) => {
   const entities = useSelector(propertiesSelector)
   const dispatch = useDispatch()
@@ -30,9 +32,11 @@ const EntitiesAdmin = ({
         entities={entities}
         properties={properties}
         onDelete={(id) => {
-          deletePage(id, dispatch)
+          deleteEntity(id, dispatch)
         }}
         onEdit={(entity) => (setSelectedEntity(entity), setDisplayForm(true))}
+        canEdit={canEdit}
+        canDelete={canDelete}
       />
       {displayForm && (
         <FormComponent

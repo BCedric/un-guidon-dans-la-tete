@@ -14,8 +14,16 @@ const EntitiesList = ({
   onDelete = () => {},
   onEdit = () => {},
   properties,
-  entities
+  entities,
+  canEdit,
+  canDelete
 }) => {
+  const getPropertyName = (property) =>
+    typeof property === 'string' ? property : property.name
+
+  const getProperty = (property, entity) =>
+    typeof property === 'string' ? entity[property] : property.render(entity)
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -24,7 +32,7 @@ const EntitiesList = ({
             <TableRow>
               {properties.map((property, index) => (
                 <TableCell key={index} className="capitalize">
-                  {property}
+                  {getPropertyName(property)}
                 </TableCell>
               ))}
               <TableCell></TableCell>
@@ -33,21 +41,28 @@ const EntitiesList = ({
           <TableBody>
             {entities.map((entity, index) => (
               <TableRow key={index}>
-                <TableCell>{entity.tag}</TableCell>
-                <TableCell>{entity.id}</TableCell>
+                {properties.map((property, index) => (
+                  <TableCell key={index}>
+                    {getProperty(property, entity)}
+                  </TableCell>
+                ))}
                 <TableCell>
-                  <span
-                    className="clickable material-icons"
-                    onClick={() => onEdit(entity)}
-                  >
-                    edit
-                  </span>
-                  <span
-                    className="clickable material-icons"
-                    onClick={() => onDelete(entity.id)}
-                  >
-                    delete
-                  </span>
+                  {canEdit && (
+                    <span
+                      className="clickable material-icons"
+                      onClick={() => onEdit(entity)}
+                    >
+                      edit
+                    </span>
+                  )}
+                  {canDelete && (
+                    <span
+                      className="clickable material-icons"
+                      onClick={() => onDelete(entity.id)}
+                    >
+                      delete
+                    </span>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
