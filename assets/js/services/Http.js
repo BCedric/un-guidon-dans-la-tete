@@ -72,6 +72,15 @@ class Http {
       })
       .then((response) => response.data)
   }
+
+  static postFormData = (url, formData, params = null) => {
+    return axios
+      .post(queryStringBuild(url), formData, {
+        params,
+        headers: setHeaders()
+      })
+      .then((response) => response.data)
+  }
 }
 
 export default Http
