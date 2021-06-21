@@ -4,4 +4,9 @@ const pageApi = {
   tags: () => `/page/tags`
 }
 
-export { pageApi }
+const mediaApi = {
+  medias: () => '/media',
+  media: (id) => `/media/${id}`
+}
+
+export { pageApi, mediaApi }
