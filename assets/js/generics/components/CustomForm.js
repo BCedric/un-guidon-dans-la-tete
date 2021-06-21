@@ -2,13 +2,20 @@ import React from 'react'
 
 import { Button } from '@material-ui/core'
 
-const CustomForm = (
-  { children, onCancel = () => {}, onSubmit = () => {} },
+const CustomForm = ({
+  children,
+  onCancel = () => {},
+  onSubmit = () => {},
   isFormDirty = true,
   isFormValid = true
-) => {
+}) => {
+  const onFormSubmit = (e) => {
+    e.preventDefault()
+    onSubmit(e)
+  }
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onFormSubmit}>
       {children}
       <div className="form-buttons-container">
         <Button
