@@ -3,7 +3,9 @@
  {% block title %} Un guidon dans la tête {% endblock %}
     
  {% block body %}
-    
+    <script>
+        window.BASE_URL = "{{baseURL}}"
+    </script>
      <div id="root"></div>
     
  {% endblock %}
