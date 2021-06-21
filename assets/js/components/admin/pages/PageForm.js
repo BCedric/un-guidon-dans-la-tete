@@ -32,7 +32,6 @@ const PageForm = ({ cancel, entity }) => {
   }
 
   const submit = (e) => {
-    e.preventDefault()
     if (entity == null) {
       postPage({ tag, content }, dispatch).then(closeForm)
     } else {

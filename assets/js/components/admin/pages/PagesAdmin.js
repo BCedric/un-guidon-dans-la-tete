@@ -5,6 +5,7 @@ import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 import { getPages } from 'store/pages/pagesSlice'
 
 import PageForm from './PageForm'
+import { deletePage } from 'store/pages/pagesSlice'
 
 const PagesAdmin = () => {
   return (
@@ -14,6 +15,7 @@ const PagesAdmin = () => {
         FormComponent={PageForm}
         propertiesSelector={getPages}
         properties={['tag', 'id']}
+        deleteEntity={deletePage}
       />
     </div>
   )
