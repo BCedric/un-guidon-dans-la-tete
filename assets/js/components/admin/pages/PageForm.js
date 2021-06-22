@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 
@@ -15,15 +15,17 @@ const PageForm = ({ cancel, entity }) => {
     useForm()
 
   const [tag, setTag] = getFormField('tag', '', true)
-  const [content, setContent] = getFormField('content', '')
+  const [content, setContent] = useState('')
+  const [hasInit, setHasInit] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     initFormFields({
-      tag: entity != null ? entity.tag : '',
-      content: entity != null ? entity.content : ''
+      tag: entity != null ? entity.tag : ''
     })
+    setContent(entity != null ? entity.content : '')
+    setHasInit(true)
   }, [entity])
 
   const closeForm = () => {
@@ -33,9 +35,9 @@ const PageForm = ({ cancel, entity }) => {
 
   const submit = (e) => {
     if (entity == null) {
-      postPage({ tag, content }, dispatch).then(closeForm)
+      return postPage({ tag, content }, dispatch)
     } else {
-      putPage(entity.id, { tag, content }, dispatch).then(closeForm)
+      return putPage(entity.id, { tag, content }, dispatch)
     }
   }
 
@@ -43,7 +45,7 @@ const PageForm = ({ cancel, entity }) => {
     <>
       <CustomForm
         onSubmit={submit}
-        onCancel={cancel}
+        onCancel={closeForm}
         isFormDirty={isFormDirty}
         isFormValid={isFormValid}
       >
@@ -53,7 +55,9 @@ const PageForm = ({ cancel, entity }) => {
           value={tag}
           onChange={(e) => setTag(e.target.value)}
         />
-        <Wysiwyg onChange={(val) => setContent(val)} value={content} />
+        {hasInit && (
+          <Wysiwyg onChange={(val) => setContent(val)} value={content} />
+        )}
       </CustomForm>
     </>
   )
