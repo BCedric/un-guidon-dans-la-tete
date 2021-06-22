@@ -26,6 +26,8 @@
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "html-to-draftjs": "^1.5.0",
+    "immutable": "^4.0.0-rc.12",
+    "jodit-react": "^1.1.1",
     "node-sass": "^6.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -35,6 +37,8 @@
     "react-router-dom": "^5.2.0",
     "react-trumbowyg": "^1.1.0",
     "redux": "^4.1.0",
-    "sass-loader": "^11.0.1"
+    "sass-loader": "^11.0.1",
+    "suneditor": "^2.41.0",
+    "suneditor-react": "^3.1.2"
   }
 }

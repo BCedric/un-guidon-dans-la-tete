@@ -5,52 +5,31 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
+import JoditEditor from 'jodit-react'
+
 import './Wysiwyg.scss'
+import { useMemo } from 'react'
 
 const Wysiwyg = ({ onChange = () => {}, value }) => {
-  const [editorState, setEditorState] = useState(null)
+  const editor = useRef(null)
 
-  useEffect(() => {
-    if (value != null) {
-      setValue(value)
-    } else {
-      setEditorState(EditorState.createEmpty())
-    }
-  }, [])
-
-  useEffect(() => {
-    if (
-      editorState != null &&
-      value !== draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    )
-      setValue(value)
-  }, [value])
-
-  const setValue = (val) => {
-    const draftValue = htmlToDraft(val)
-    if (draftValue) {
-      const contentState = ContentState.createFromBlockArray(
-        draftValue.contentBlocks
-      )
-      const editorState = EditorState.createWithContent(contentState)
-      setEditorState(editorState)
-    }
+  const config = {
+    readonly: false // all options from https://xdsoft.net/jodit/doc/
   }
 
-  const handleChange = (e) => {
-    setEditorState(e)
-    onChange(draftToHtml(convertToRaw(e.getCurrentContent())))
-  }
-
-  return (
-    <>
-      <Editor
-        editorState={editorState}
-        wrapperClassName="wysiwyg-wrapper"
-        onEditorStateChange={handleChange}
-      />
-    </>
+  return useMemo(
+    () => (
+      <>
+        <JoditEditor
+          editorRef={editor}
+          value={value}
+          config={config}
+          onChange={onChange}
+        />
+      </>
+    ),
+    []
   )
 }
 
-export default Wysiwyg
+export default React.memo(Wysiwyg)

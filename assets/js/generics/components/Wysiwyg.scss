@@ -9,3 +9,15 @@
     flex: 1;
   }
 }
+
+.jodit-toolbar-button {
+  &_font,
+  &_fontsize,
+  &_print,
+  &_fullsize,
+  &_about,
+  &_classSpan,
+  &_selectall {
+    display: none !important;
+  }
+}
