@@ -5,22 +5,20 @@ import { postMedia } from 'store/pages/mediaSlice'
 import { Input } from '@material-ui/core'
 
 const MediaForm = ({ cancel }) => {
-  const fileInput = React.createRef()
-
   const [isFormValid, setIsFormValid] = useState(false)
+  const [file, setFile] = useState(null)
 
   const dispatch = useDispatch()
 
   const submit = (e) => {
-    const file = fileInput.current.files[0]
     const formData = new FormData()
-    console.log(file)
     formData.append('file', file)
-    console.log(formData)
-    postMedia(formData, dispatch)
+    return postMedia(formData, dispatch)
   }
 
-  const handleFileChange = (e) => setIsFormValid(e.target.files[0] != null)
+  const handleFileChange = (e) => (
+    setIsFormValid(e.target.files[0] != null), setFile(e.target.files[0])
+  )
 
   return (
     <CustomForm
@@ -36,7 +34,6 @@ const MediaForm = ({ cancel }) => {
         className="form-control"
         id="fanfaron-file-input"
         type="file"
-        ref={fileInput}
       ></Input>
     </CustomForm>
   )
