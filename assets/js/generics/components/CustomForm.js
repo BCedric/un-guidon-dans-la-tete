@@ -11,7 +11,7 @@ const CustomForm = ({
 }) => {
   const onFormSubmit = (e) => {
     e.preventDefault()
-    onSubmit(e)
+    onSubmit(e).then(onCancel)
   }
 
   return (
