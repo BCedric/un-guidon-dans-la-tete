@@ -9,4 +9,9 @@ const mediaApi = {
   media: (id) => `/media/${id}`
 }
 
-export { pageApi, mediaApi }
+const menuApi = {
+  menu: () => '/menu',
+  menuItem: (id) => `/menu/${id}`
+}
+
+export { pageApi, mediaApi, menuApi }
