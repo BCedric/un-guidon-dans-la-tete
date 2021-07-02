@@ -2,11 +2,14 @@ import React, { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
 
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+
 import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 
 import { fetchMedias, getMedias, deleteMedia } from 'store/pages/mediaSlice'
 
 import MediaForm from './MediaForm'
+import { Button } from '@material-ui/core'
 
 const MediaAdmin = () => {
   const dispatch = useDispatch()
@@ -14,6 +17,9 @@ const MediaAdmin = () => {
   useEffect(() => {
     fetchMedias(dispatch)
   }, [])
+
+  const getMediaURL = (media) =>
+    `${window.BASE_URL}/api/media/${media.filename}`
 
   return (
     <div>
@@ -30,8 +36,16 @@ const MediaAdmin = () => {
           },
           {
             name: 'URL',
-            render: (entity) =>
-              `${window.BASE_URL}/api/media/${entity.filename}`
+            render: (entity) => (
+              <div>
+                <span>{getMediaURL(entity)}</span>
+                <Button onClick={() => {}}>
+                  <CopyToClipboard text={getMediaURL(entity)}>
+                    <span className="material-icons">content_copy</span>
+                  </CopyToClipboard>
+                </Button>
+              </div>
+            )
           },
           {
             name: 'aperçu',
