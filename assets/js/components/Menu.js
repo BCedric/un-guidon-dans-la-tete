@@ -16,12 +16,13 @@ const Menu = () => {
       return
     }
     return item.children.length === 0 ? (
-      <li key={index}>
-        <Link to={`/${item.page.tag}`}>{item.name}</Link>
-      </li>
+      <Link key={index} to={`/${item.page.tag}`}>
+        <li>{item.name}</li>
+      </Link>
     ) : (
       <li key={index}>
         <span>{item.name}</span>
+        <span className="material-icons">expand_more</span>
         <ul>
           {item.children.map((child, index) => renderItem(child, index, item))}
         </ul>
@@ -34,9 +35,16 @@ const Menu = () => {
   }, [pages])
 
   return (
-    <nav>
-      <ul>{menuItems.map((item, index) => renderItem(item, index, null))}</ul>
-    </nav>
+    <div>
+      <div className="bike-icon-container">
+        <span className="material-icons bike-icon">directions_bike</span>
+      </div>
+      <nav>
+        <ul className="first-level">
+          {menuItems.map((item, index) => renderItem(item, index, null))}
+        </ul>
+      </nav>
+    </div>
   )
 }
 

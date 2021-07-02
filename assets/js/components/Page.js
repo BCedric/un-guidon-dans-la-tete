@@ -11,12 +11,28 @@ const Page = ({ tag }) => {
     setPage(pagesFilter(tag))
   }, [])
 
+  console.log(page)
+
   return (
-    <div>
+    <>
       {page != null && (
-        <div dangerouslySetInnerHTML={{ __html: page.content }}></div>
+        <>
+          {page.headingImg != null && (
+            <img
+              className="page-heading-img"
+              src={`${window.BASE_URL}/api/media/${page.headingImg.filename}`}
+            />
+          )}
+        </>
       )}
-    </div>
+      <div className="page-content">
+        {page != null && (
+          <>
+            <div dangerouslySetInnerHTML={{ __html: page.content }}></div>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

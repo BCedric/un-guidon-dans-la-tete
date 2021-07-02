@@ -18,8 +18,7 @@ import { getPages } from 'store/pages/pagesSlice'
 import { postMenuItem, getMenuItems, putMenuItem } from 'store/pages/menuSlice'
 
 const MenuItemForm = ({ cancel, entity }) => {
-  const { resetForm, getFormField, initFormFields, isFormValid, isFormDirty } =
-    useForm()
+  const { resetForm, getFormField, initFormFields, isFormDirty } = useForm()
 
   const [position, setPosition] = getFormField('position', 0)
   const [page, setPage] = getFormField('page', -1)
@@ -32,6 +31,9 @@ const MenuItemForm = ({ cancel, entity }) => {
   )
 
   const dispatch = useDispatch()
+
+  const isFormValid =
+    (page !== -1 || (children != null && children.length > 0)) && name !== ''
 
   useEffect(() => {
     initFormFields({
