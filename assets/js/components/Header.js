@@ -1,10 +1,12 @@
 import React from 'react'
 import Menu from './Menu'
 
+import logo from 'imgs/logo.png'
+
 const Header = () => {
   return (
-    <div>
-      <h1>Un guidon dans la tête</h1>
+    <div className="header">
+      <img src={logo} />
       <Menu />
     </div>
   )
