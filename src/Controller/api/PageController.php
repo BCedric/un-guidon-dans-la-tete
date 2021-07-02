@@ -3,6 +3,7 @@
 namespace App\Controller\api;
 
 use App\Entity\Page;
+use App\Repository\MediaRepository;
 use App\Repository\PageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,26 +51,28 @@ class PageController extends AbstractController
     /**
      * @Route("", name="post_page", methods={"POST"})
      */
-    public function createPage(Request $request, EntityManagerInterface $em, PageRepository $pageRepository)
+    public function createPage(Request $request, EntityManagerInterface $em, PageRepository $pageRepository, MediaRepository $mediaRepository)
     {
         $body = json_decode($request->getContent(), true);
         $page = new Page();
+        $body['headingImg'] != null && $body['headingImg'] = $mediaRepository->findOneBy(['id' => $body['headingImg']]);
         $page->setPage($body);
-
+        
         $em->persist($page);
         $em->flush();
         return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
             return $object->getId();
         }]));
     }
-
+    
     /**
      * @Route("/{id}", name="put_page", methods={"PUT"})
      */
-    public function updatePage(string $id, Request $request, EntityManagerInterface $em, PageRepository $pageRepository)
+    public function updatePage(string $id, Request $request, EntityManagerInterface $em, PageRepository $pageRepository, MediaRepository $mediaRepository)
     {
         $body = json_decode($request->getContent(), true);
         $page = $pageRepository->findOneBy(['id' => $id]);
+        $body['headingImg'] != null && $body['headingImg'] = $mediaRepository->findOneBy(['id' => $body['headingImg']]);
 
         $page->setPage($body);
 

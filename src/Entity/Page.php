@@ -27,10 +27,16 @@ class Page
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Media::class)
+     */
+    private $headingImg;
+
     public function setPage(array $props)
     {
         $this->setContent($props['content']);
         $this->setTag($props['tag']);
+        $this->setHeadingImg($props['headingImg']);
     }
 
     public function getId(): ?int
@@ -58,6 +64,18 @@ class Page
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getHeadingImg(): ?Media
+    {
+        return $this->headingImg;
+    }
+
+    public function setHeadingImg(?Media $headingImg): self
+    {
+        $this->headingImg = $headingImg;
 
         return $this;
     }
