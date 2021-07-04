@@ -1,0 +1,31 @@
+.admin-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .admin-menu {
+    min-width: 300px;
+    background-color: #d7ccae;
+    list-style-type: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 0;
+
+    li {
+      padding: 1em 2em !important;
+      color: white;
+
+      &.active,
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .admin-content {
+    margin: 0 1em;
+    flex: 1;
+  }
+}
