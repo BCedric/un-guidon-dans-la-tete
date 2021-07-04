@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormLabel,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   TextField
 } from '@material-ui/core'
@@ -24,6 +27,7 @@ const MenuItemForm = ({ cancel, entity }) => {
   const [page, setPage] = getFormField('page', -1)
   const [children, setChildren] = getFormField('children', [])
   const [name, setName] = getFormField('name', '')
+  const [itemType, setItemType] = useState('element')
 
   const pages = useSelector(getPages)
   const menuItems = useSelector(getMenuItems).filter(
@@ -36,16 +40,24 @@ const MenuItemForm = ({ cancel, entity }) => {
     (page !== -1 || (children != null && children.length > 0)) && name !== ''
 
   useEffect(() => {
-    initFormFields({
-      position: entity != null ? entity.position : 0,
-      page: entity != null ? (entity.page != null ? entity.page.id : -1) : -1,
-      children: entity != null ? entity.children.map((child) => child.id) : [],
-      name: entity != null ? entity.name : ''
-    })
+    if (entity != null) {
+      initFormFields({
+        position: entity.position,
+        page: entity.page != null ? entity.page.id : -1,
+        children: entity.children.map((child) => child.id),
+        name: entity.name
+      })
+      setItemType(entity.page != null ? 'element' : 'sub-menu')
+    }
   }, [entity])
 
   const submit = (e) => {
-    const item = { position, page: page === -1 ? null : page, children, name }
+    const item = {
+      position,
+      page: itemType !== 'element' ? null : page,
+      children: itemType !== 'sub-menu' ? children : [],
+      name
+    }
     if (entity != null) {
       return putMenuItem(entity.id, item, dispatch)
     } else {
@@ -80,58 +92,86 @@ const MenuItemForm = ({ cancel, entity }) => {
       isFormValid={isFormValid}
     >
       {children != null && (
-        <div className="form-line align-end">
-          <TextField
-            label="Nom"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></TextField>
-          <TextField
-            label="Position"
-            type="number"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-          ></TextField>
-          <FormControl>
-            <InputLabel id="page-label">Page</InputLabel>
-            <Select
-              disabled={children.length > 0}
-              value={page}
-              onChange={(e) => setPage(e.target.value)}
-              labelId="page-label"
-            >
-              <MenuItem value={-1}>Aucune</MenuItem>
-              {pages.map((p, index) => (
-                <MenuItem key={index} value={p.id}>
-                  {p.tag}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          {displayChildrenFields && (
-            <div>
-              <span>Enfants : </span>
-              {menuItems.map(
-                (item, index) =>
-                  item.children.length === 0 && (
+        <>
+          <div className="form-line align-end">
+            <TextField
+              label="Nom"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></TextField>
+            <TextField
+              label="Position"
+              type="number"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+            ></TextField>
+          </div>
+          <div>
+            {entity.parent == null && (
+              <div className="form-line align-end">
+                <FormControl>
+                  <FormLabel component="legend">Type d'élément</FormLabel>
+                  <RadioGroup
+                    value={itemType}
+                    onChange={(e) => setItemType(e.target.value)}
+                  >
                     <FormControlLabel
-                      key={index}
-                      control={
-                        <Checkbox
-                          checked={children.includes(item.id)}
-                          onChange={(e) => handleChildChange(e, item.id)}
-                          name="checkedA"
-                          disabled={page !== -1}
-                        />
-                      }
-                      label={item.name !== '' ? item.name : item.id}
+                      control={<Radio />}
+                      label="Element de menu"
+                      value="element"
                     />
-                  )
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Sous menu"
+                      value="sub-menu"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+            )}
+            <div className="form-line">
+              {itemType === 'element' && (
+                <FormControl>
+                  <InputLabel id="page-label">Page</InputLabel>
+                  <Select
+                    value={page}
+                    onChange={(e) => setPage(e.target.value)}
+                    labelId="page-label"
+                  >
+                    <MenuItem value={-1}>Aucune</MenuItem>
+                    {pages.map((p, index) => (
+                      <MenuItem key={index} value={p.id}>
+                        {p.tag}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               )}
             </div>
-          )}
-        </div>
+            {itemType === 'sub-menu' && (
+              <div>
+                <span>Sous éléments : </span>
+                {menuItems.map(
+                  (item, index) =>
+                    item.children.length === 0 && (
+                      <FormControlLabel
+                        key={index}
+                        control={
+                          <Checkbox
+                            checked={children.includes(item.id)}
+                            onChange={(e) => handleChildChange(e, item.id)}
+                            name="checkedA"
+                          />
+                        }
+                        label={item.name !== '' ? item.name : item.id}
+                      />
+                    )
+                )}
+              </div>
+            )}
+          </div>
+        </>
       )}
     </CustomForm>
   )
