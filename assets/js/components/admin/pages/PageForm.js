@@ -40,6 +40,7 @@ const PageForm = ({ cancel, entity }) => {
     initFormFields({
       tag: entity != null ? entity.tag : ''
     })
+    setImg(entity.headingImg != null ? entity.headingImg.id : -1)
     setContent(entity != null ? entity.content : '')
     setHasInit(true)
   }, [entity])
