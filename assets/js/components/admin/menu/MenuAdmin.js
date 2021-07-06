@@ -15,7 +15,12 @@ const MenuAdmin = () => {
     fetchMenu(dispatch)
   }, [])
 
-  const menuItems = useSelector(getMenuItems)
+  const getArborescence = (item) =>
+    item != null
+      ? `${getArborescence(item.parent)} ${item.parent != null ? '=>' : ''} ${
+          item.name
+        }`
+      : ''
 
   return (
     <div>
@@ -24,11 +29,15 @@ const MenuAdmin = () => {
         FormComponent={MenuItemForm}
         propertiesSelector={getMenuItems}
         properties={[
-          'id',
           { name: 'nom', render: (entity) => entity.name },
           'position',
           {
-            name: 'children',
+            name: 'arborescence',
+            render: (entity) =>
+              entity.parent != null ? getArborescence(entity) : ''
+          },
+          {
+            name: 'sous-éléments',
             render: (entity) =>
               entity.children
                 .map((child) => (child.name !== '' ? child.name : child.id))
