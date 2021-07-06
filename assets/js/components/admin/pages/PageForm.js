@@ -37,11 +37,13 @@ const PageForm = ({ cancel, entity }) => {
   }, [])
 
   useEffect(() => {
-    initFormFields({
-      tag: entity != null ? entity.tag : ''
-    })
-    setImg(entity.headingImg != null ? entity.headingImg.id : -1)
-    setContent(entity != null ? entity.content : '')
+    if (entity != null) {
+      initFormFields({
+        tag: entity.tag
+      })
+      setImg(entity.headingImg != null ? entity.headingImg.id : -1)
+      setContent(entity.content)
+    }
     setHasInit(true)
   }, [entity])
 
