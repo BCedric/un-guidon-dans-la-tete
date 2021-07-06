@@ -11,8 +11,6 @@ const Page = ({ tag }) => {
     setPage(pagesFilter(tag))
   }, [])
 
-  console.log(page)
-
   return (
     <>
       {page != null && (
