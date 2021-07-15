@@ -32,11 +32,17 @@ class Page
      */
     private $headingImg;
 
+    /**
+     * @ORM\Column(type="integer", nullable=false, options={"default" : 50})
+     */
+    private $headingImgPosition;
+
     public function setPage(array $props)
     {
         $this->setContent($props['content']);
         $this->setTag($props['tag']);
         $this->setHeadingImg($props['headingImg']);
+        $this->setHeadingImgPosition($props['headingImgPosition']);
     }
 
     public function getId(): ?int
@@ -76,6 +82,18 @@ class Page
     public function setHeadingImg(?Media $headingImg): self
     {
         $this->headingImg = $headingImg;
+
+        return $this;
+    }
+
+    public function getHeadingImgPosition(): ?int
+    {
+        return $this->headingImgPosition;
+    }
+
+    public function setHeadingImgPosition(?int $headingImgPosition): self
+    {
+        $this->headingImgPosition = $headingImgPosition;
 
         return $this;
     }

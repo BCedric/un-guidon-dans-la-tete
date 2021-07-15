@@ -17,6 +17,7 @@ const Page = ({ tag }) => {
         <>
           {page.headingImg != null && (
             <img
+              style={{ objectPosition: `0 ${page.headingImgPosition}%` }}
               className="page-heading-img"
               src={`${window.BASE_URL}/api/media/${page.headingImg.filename}`}
             />

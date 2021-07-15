@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   FormControl,
+  FormHelperText,
+  Input,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -24,6 +27,7 @@ const PageForm = ({ cancel, entity }) => {
   const [content, setContent] = useState('')
   const [hasInit, setHasInit] = useState(false)
   const [img, setImg] = useState(-1)
+  const [headingImgPosition, setHeadingImgPosition] = useState(50)
 
   const medias = useSelector(getMedias)
   const imgs = medias.filter((media) => media.type.includes('image'))
@@ -43,6 +47,7 @@ const PageForm = ({ cancel, entity }) => {
       })
       setImg(entity.headingImg != null ? entity.headingImg.id : -1)
       setContent(entity.content)
+      setHeadingImgPosition(entity.headingImgPosition)
     }
     setHasInit(true)
   }, [entity])
@@ -53,13 +58,16 @@ const PageForm = ({ cancel, entity }) => {
   }
 
   const submit = (e) => {
+    const newPage = {
+      tag,
+      content,
+      headingImg: img === -1 ? null : img,
+      headingImgPosition
+    }
     if (entity == null) {
-      return postPage(
-        { tag, content, headingImg: img === -1 ? null : img },
-        dispatch
-      )
+      return postPage(newPage, dispatch)
     } else {
-      return putPage(entity.id, { tag, content }, dispatch)
+      return putPage(entity.id, newPage, dispatch)
     }
   }
 
@@ -70,7 +78,7 @@ const PageForm = ({ cancel, entity }) => {
         onCancel={closeForm}
         isFormValid={isFormValid}
       >
-        <div className="form-line">
+        <div className="form-line align-end">
           <TextField
             label="Tag"
             type="text"
@@ -91,6 +99,19 @@ const PageForm = ({ cancel, entity }) => {
                 </MenuItem>
               ))}
             </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="heading-image-position">
+              Position de l'image d'entête
+            </InputLabel>
+            <Input
+              id="heading-image-position"
+              type="number"
+              value={headingImgPosition}
+              onChange={(e) => setHeadingImgPosition(e.target.value)}
+              disabled={img === -1}
+              endAdornment={<InputAdornment position="end">%</InputAdornment>}
+            />
           </FormControl>
         </div>
         {hasInit && (
