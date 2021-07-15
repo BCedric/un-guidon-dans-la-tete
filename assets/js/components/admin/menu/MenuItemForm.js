@@ -55,7 +55,7 @@ const MenuItemForm = ({ cancel, entity }) => {
     const item = {
       position,
       page: itemType !== 'element' ? null : page,
-      children: itemType !== 'sub-menu' ? children : [],
+      children: itemType !== 'sub-menu' ? [] : children,
       name
     }
     if (entity != null) {
@@ -108,7 +108,7 @@ const MenuItemForm = ({ cancel, entity }) => {
             ></TextField>
           </div>
           <div>
-            {entity.parent == null && (
+            {(entity == null || entity.parent == null) && (
               <div className="form-line align-end">
                 <FormControl>
                   <FormLabel component="legend">Type d'élément</FormLabel>
