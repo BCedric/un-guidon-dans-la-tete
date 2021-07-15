@@ -66,6 +66,14 @@ const EntitiesList = ({
                 </TableCell>
               </TableRow>
             ))}
+            {entities.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={properties.length} className="informations">
+                  <span className="material-icons">info</span>
+                  <span>Cette table ne contient aucun élément</span>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

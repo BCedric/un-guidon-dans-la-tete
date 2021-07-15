@@ -1,0 +1,10 @@
+.informations {
+  font-style: italic;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  & > *:nth-child(n-1) {
+    margin-left: 0.5em;
+  }
+}
