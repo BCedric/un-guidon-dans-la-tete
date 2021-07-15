@@ -47,7 +47,7 @@ const MenuItemForm = ({ cancel, entity }) => {
         children: entity.children.map((child) => child.id),
         name: entity.name
       })
-      setItemType(entity.page != null ? 'element' : 'sub-menu')
+      setItemType(entity.children.length === 0 ? 'element' : 'sub-menu')
     }
   }, [entity])
 

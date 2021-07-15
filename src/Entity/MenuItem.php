@@ -21,6 +21,7 @@ class MenuItem
 
     /**
      * @ORM\ManyToOne(targetEntity=Page::class)
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $page;
 

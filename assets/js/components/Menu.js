@@ -11,11 +11,18 @@ const Menu = () => {
 
   const menuItems = useSelector(getMenuItems)
 
+  const isItemParent = (item) => item.children.length > 0
+  const hasItemPage = (item) => item.page != null
+  const isItemChild = (item) => item.parent != null
+
   const renderItem = (item, index, parent) => {
-    if (item.parent != null && (parent == null || item.parent != parent.id)) {
+    if (
+      (!hasItemPage(item) && !isItemParent(item)) ||
+      (isItemChild(item) && (parent == null || item.parent != parent.id))
+    ) {
       return
     }
-    return item.children.length === 0 ? (
+    return !isItemParent(item) ? (
       <Link key={index} to={`/${item.page.tag}`}>
         <li>{item.name}</li>
       </Link>
