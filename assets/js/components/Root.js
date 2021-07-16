@@ -9,6 +9,7 @@ import { fetchMenu } from 'store/pages/menuSlice'
 import { getHasFetchMenu } from 'store/pages/menuSlice'
 
 import Router from './Router'
+import Footer from './Footer'
 
 const Root = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Root = () => {
           <Router>
             <Header></Header>
           </Router>
+          <Footer></Footer>
         </div>
       )}
     </div>
