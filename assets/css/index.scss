@@ -5,6 +5,7 @@
 
 @import './specifics/admin.scss';
 @import './specifics/content.scss';
+@import './specifics/footer.scss';
 @import './specifics/header.scss';
 @import './specifics/medias.scss';
 
@@ -12,4 +13,6 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   margin: 0;
   cursor: url('../imgs/rsz_92602.png') 4 12, auto;
+  background-color: #40322fda;
+  min-height: 100vh;
 }

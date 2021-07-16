@@ -1,0 +1,10 @@
+footer {
+  background-color: #d7ccae;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 2em;
+  & > *:nth-child(n-1) {
+    margin-right: 0.5em;
+  }
+}
