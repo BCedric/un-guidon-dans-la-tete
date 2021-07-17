@@ -12,7 +12,7 @@ const Page = ({ tag }) => {
   }, [])
 
   return (
-    <>
+    <div className="page-container">
       {page != null && (
         <>
           {page.headingImg != null && (
@@ -31,7 +31,7 @@ const Page = ({ tag }) => {
           </>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

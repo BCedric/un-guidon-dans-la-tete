@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 @import './generics/capitalize.scss';
 @import './generics/clickable.scss';
 @import './generics/informations.scss';
@@ -13,6 +15,6 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   margin: 0;
   cursor: url('../imgs/rsz_92602.png') 4 12, auto;
-  background-color: #40322fda;
+  background-color: $backgroundColor;
   min-height: 100vh;
 }

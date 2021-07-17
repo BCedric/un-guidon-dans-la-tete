@@ -3,11 +3,11 @@ import Menu from './Menu'
 
 import logo from 'imgs/logo.png'
 
-const Header = () => {
+const Header = ({ isMenuFixe = false }) => {
   return (
     <div className="header">
       <img src={logo} />
-      <Menu />
+      <Menu className={isMenuFixe ? 'fixe' : ''} />
     </div>
   )
 }

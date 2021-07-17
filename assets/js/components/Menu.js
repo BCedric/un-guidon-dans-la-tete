@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { getPages } from 'store/pages/pagesSlice'
 import { getMenuItems } from 'store/pages/menuSlice'
 
-const Menu = () => {
+const Menu = ({ className }) => {
   const pages = useSelector(getPages)
   const [tags, setTags] = useState([])
 
@@ -46,7 +46,7 @@ const Menu = () => {
       <div className="bike-icon-container">
         <span className="material-icons bike-icon">directions_bike</span>
       </div>
-      <nav>
+      <nav className={className}>
         <ul className="first-level">
           {menuItems.map((item, index) => renderItem(item, index, null))}
         </ul>

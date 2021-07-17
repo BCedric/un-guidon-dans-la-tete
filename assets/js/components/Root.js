@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -18,6 +18,18 @@ const Root = () => {
   const hasFetchMenu = useSelector(getHasFetchMenu)
 
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleScroll = (e) => {
+    console.log(window.scrollY, e)
+    setScroll(window.scrollY)
+  }
+
+  const [scroll, setScroll] = useState(0)
+  const isMenuFixe = scroll > 270
+
+  useEffect(() => {
     fetchPages(dispatch)
     fetchMenu(dispatch)
   }, [])
@@ -26,8 +38,8 @@ const Root = () => {
     <div>
       {hasFetchMenu && hasFetchPages && !isLoadingPages && (
         <div>
-          <Router>
-            <Header></Header>
+          <Router isMenuFixe={isMenuFixe}>
+            <Header isMenuFixe={isMenuFixe}></Header>
           </Router>
           <Footer></Footer>
         </div>

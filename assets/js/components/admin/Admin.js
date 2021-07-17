@@ -12,11 +12,7 @@ const menuAdminItems = [
 ]
 
 const Admin = () => {
-  return (
-    <div>
-      <AdminMenu items={menuAdminItems}></AdminMenu>
-    </div>
-  )
+  return <AdminMenu items={menuAdminItems}></AdminMenu>
 }
 
 export default Admin

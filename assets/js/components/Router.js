@@ -13,7 +13,8 @@ const Router = (props) => {
   return (
     <HashRouter>
       {props.children}
-      <div className="content">
+      <div className={`content ${props.isMenuFixe ? 'menu-fixed' : ''}`}>
+        <div className="margin-left"></div>
         <Switch>
           {pages.length > 0 && (
             <Route
@@ -38,6 +39,7 @@ const Router = (props) => {
             ></Route>
           ))}
         </Switch>
+        <div className="margin-right"></div>
       </div>
     </HashRouter>
   )

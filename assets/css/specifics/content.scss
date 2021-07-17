@@ -1,12 +1,30 @@
 .content {
-  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+
+  &.menu-fixed {
+    margin-top: 72px;
+  }
+
+  .margin-left,
+  .margin-right {
+    flex: 1;
+  }
+
+  .margin-right {
+    // background-image: url('../../imgs/montagne_roues.jpg');
+    background-position: 70% -100px;
+    background-repeat: no-repeat;
+  }
+
   h1 {
     text-align: center;
     font-size: 2.5em;
   }
 
   h2 {
-    border-bottom: 1px solid #d7ccae;
+    border-bottom: 1px solid $menuBackgroundColor;
   }
   p {
     padding: 1em 2em;
@@ -18,7 +36,14 @@
     object-fit: cover;
   }
 
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    width: $contentWidth;
+  }
+
   .page-content {
     padding: 1em 2em;
+    background-color: white;
   }
 }
