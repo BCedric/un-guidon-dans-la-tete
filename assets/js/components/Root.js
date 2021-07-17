@@ -37,7 +37,7 @@ const Root = () => {
   return (
     <div>
       {hasFetchMenu && hasFetchPages && !isLoadingPages && (
-        <div>
+        <div className="app-root">
           <Router isMenuFixe={isMenuFixe}>
             <Header isMenuFixe={isMenuFixe}></Header>
           </Router>

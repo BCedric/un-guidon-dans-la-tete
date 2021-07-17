@@ -1,7 +1,7 @@
 .content {
   display: flex;
   flex-direction: row;
-  margin: auto;
+  flex: 1;
 
   &.menu-fixed {
     margin-top: 72px;
