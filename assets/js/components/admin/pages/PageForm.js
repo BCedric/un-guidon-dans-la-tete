@@ -115,7 +115,11 @@ const PageForm = ({ cancel, entity }) => {
           </FormControl>
         </div>
         {hasInit && (
-          <Wysiwyg onChange={(val) => setContent(val)} value={content} />
+          <Wysiwyg
+            onChange={(val) => setContent(val)}
+            value={content}
+            parentProperty={entity}
+          />
         )}
       </CustomForm>
     </>
