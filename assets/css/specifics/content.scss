@@ -30,6 +30,15 @@
     padding: 1em 2em;
   }
 
+  ul {
+    padding-left: 4em;
+  }
+
+  a {
+    color: #039be5;
+    text-decoration: none;
+  }
+
   .page-heading-img {
     width: 100%;
     max-height: 500px;
@@ -44,6 +53,7 @@
 
   .page-content {
     padding: 1em 2em;
-    background-color: white;
+    background-color: $backgroundColor;
+    height: 100%;
   }
 }

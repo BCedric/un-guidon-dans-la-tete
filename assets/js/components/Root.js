@@ -22,7 +22,6 @@ const Root = () => {
   }, [])
 
   const handleScroll = (e) => {
-    console.log(window.scrollY, e)
     setScroll(window.scrollY)
   }
 

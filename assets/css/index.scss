@@ -12,10 +12,10 @@
 @import './specifics/medias.scss';
 
 body {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: sans-serif, 'Roboto', 'Helvetica', 'Arial';
   margin: 0;
   cursor: url('../imgs/rsz_92602.png') 4 12, auto;
-  background-color: $backgroundColor;
+  background-color: $sideColor;
   min-height: 100vh;
 }
 
