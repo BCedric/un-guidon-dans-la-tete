@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
+import { HashRouter, Route, Switch, useParams } from 'react-router-dom'
+
 import Header from './Header'
 
 import { fetchPages } from 'store/pages/pagesSlice'
@@ -37,9 +39,11 @@ const Root = () => {
     <div>
       {hasFetchMenu && hasFetchPages && !isLoadingPages && (
         <div className="app-root">
-          <Router isMenuFixe={isMenuFixe}>
-            <Header isMenuFixe={isMenuFixe}></Header>
-          </Router>
+          <HashRouter>
+            <Router isMenuFixe={isMenuFixe}>
+              <Header isMenuFixe={isMenuFixe}></Header>
+            </Router>
+          </HashRouter>
           <Footer></Footer>
         </div>
       )}

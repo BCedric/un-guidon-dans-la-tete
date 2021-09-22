@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation } from 'react-router-dom'
 
 import { getPages } from 'store/pages/pagesSlice'
 import routes from 'constants/routes-const'
@@ -9,12 +9,14 @@ import Page from './Page'
 
 const Router = (props) => {
   const pages = useSelector(getPages)
+  const location = useLocation()
+  const isInAdmin = location.pathname.includes('admin')
 
   return (
-    <HashRouter>
+    <>
       {props.children}
       <div className={`content ${props.isMenuFixe ? 'menu-fixed' : ''}`}>
-        <div className="margin-left"></div>
+        {!isInAdmin && <div className="margin-left"></div>}
         <Switch>
           {pages.length > 0 && (
             <Route
@@ -39,9 +41,9 @@ const Router = (props) => {
             ></Route>
           ))}
         </Switch>
-        <div className="margin-right"></div>
+        {!isInAdmin && <div className="margin-right"></div>}
       </div>
-    </HashRouter>
+    </>
   )
 }
 
