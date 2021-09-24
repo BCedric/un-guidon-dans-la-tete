@@ -15,10 +15,8 @@ const Wysiwyg = ({ onChange = () => {}, value, parentProperty }) => {
 
   useEffect(() => {
     const DOMeditor = document.getElementsByClassName('jodit-wysiwyg')[0]
-    console.log(DOMeditor)
     if (DOMeditor != null) {
       if (parentProperty != null) {
-        console.log(DOMeditor)
         DOMeditor.innerHTML = parentProperty.content
       } else {
         DOMeditor.innerHTML = ''
