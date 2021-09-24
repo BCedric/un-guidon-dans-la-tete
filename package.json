@@ -35,7 +35,7 @@
     "react-dom": "^17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.0",
     "react-trumbowyg": "^1.1.0",
     "redux": "^4.1.0",
     "sass-loader": "^11.0.1",
