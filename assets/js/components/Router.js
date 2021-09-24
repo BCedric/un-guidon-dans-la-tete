@@ -6,11 +6,21 @@ import { getPages } from 'store/pages/pagesSlice'
 import routes from 'constants/routes-const'
 
 import Page from './Page'
+import { getMenuItems } from '../store/pages/menuSlice'
 
 const Router = (props) => {
   const pages = useSelector(getPages)
+  const menuItems = useSelector(getMenuItems)
   const location = useLocation()
   const isInAdmin = location.pathname.includes('admin')
+
+  const firstElement = () => {
+    if(menuItems.length === 0) {
+      return null
+    }
+    const item = menuItems[0]
+    return item.children.length > 0 ? item.children[0].page : item.page
+  }
 
   return (
     <>
@@ -22,7 +32,7 @@ const Router = (props) => {
             <Route
               exact
               path={`/`}
-              render={(props) => <Page {...props} tag={pages[0].tag} />}
+              render={(props) => <Page {...props} tag={firstElement().tag} />}
             ></Route>
           )}
           {pages.map((page, index) => (
