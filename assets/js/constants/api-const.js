@@ -14,4 +14,9 @@ const menuApi = {
   menuItem: (id) => `/menu/${id}`
 }
 
-export { pageApi, mediaApi, menuApi }
+const infosApi = {
+  infos: () => '/info',
+  info: (id) => `/info/${id}`
+}
+
+export { pageApi, mediaApi, menuApi, infosApi }

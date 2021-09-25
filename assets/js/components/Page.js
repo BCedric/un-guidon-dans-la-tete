@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getPageByTag } from 'store/pages/pagesSlice'
 import { getMenuItems } from 'store/pages/menuSlice'
+import { getInfos } from 'store/pages/infosSlice'
 
 const Page = ({ tag }) => {
   const pagesFilter = useSelector(getPageByTag)
+  const infos = useSelector(getInfos)
 
   const menuItems = useSelector(getMenuItems)
   const [page, setPage] = useState(null)
@@ -22,6 +24,19 @@ const Page = ({ tag }) => {
       )
     }
   }, [menuItems, page])
+
+  const getContent = () => {
+    var content = page.content
+    while (content.indexOf('[[') !== -1) {
+      const start = content.indexOf('[[')
+      const end = content.indexOf(']]')
+      const strToReplace = content.substring(start + 2, end).trim()
+      const valueObj = infos.find((info) => info.tag === strToReplace)
+      const strToInsert = valueObj != null ? valueObj.value : ''
+      content = content.slice(0, start) + strToInsert + content.slice(end + 2)
+    }
+    return content
+  }
 
   return (
     <div className="page-container">
@@ -40,7 +55,7 @@ const Page = ({ tag }) => {
       <div className="page-content">
         {page != null && (
           <>
-            <div dangerouslySetInnerHTML={{ __html: page.content }}></div>
+            <div dangerouslySetInnerHTML={{ __html: getContent() }}></div>
           </>
         )}
       </div>

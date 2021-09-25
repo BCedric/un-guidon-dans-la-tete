@@ -11,7 +11,8 @@ const EntitiesAdmin = ({
   properties,
   deleteEntity,
   canEdit = true,
-  canDelete = true
+  canDelete = true,
+  canAdd = true
 }) => {
   const entities = useSelector(propertiesSelector)
   const dispatch = useDispatch()
@@ -22,12 +23,14 @@ const EntitiesAdmin = ({
   return (
     <div>
       <h2>{title}</h2>
-      <span
-        className="clickable material-icons"
-        onClick={() => (setSelectedEntity(null), setDisplayForm(true))}
-      >
-        add
-      </span>
+      {canAdd && (
+        <span
+          className="clickable material-icons"
+          onClick={() => (setSelectedEntity(null), setDisplayForm(true))}
+        >
+          add
+        </span>
+      )}
       <EntitiesList
         entities={entities}
         properties={properties}

@@ -9,6 +9,7 @@ import Header from './Header'
 import { fetchPages } from 'store/pages/pagesSlice'
 import { fetchMenu } from 'store/pages/menuSlice'
 import { getHasFetchMenu } from 'store/pages/menuSlice'
+import { getHasFetchInfos, fetchInfos } from 'store/pages/infosSlice'
 
 import Router from './Router'
 import Footer from './Footer'
@@ -18,6 +19,7 @@ const Root = () => {
   const isLoadingPages = useSelector((state) => state.pages.isLoading)
   const hasFetchPages = useSelector((state) => state.pages.hasFetch)
   const hasFetchMenu = useSelector(getHasFetchMenu)
+  const hasFetchInfos = useSelector(getHasFetchInfos)
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -33,11 +35,12 @@ const Root = () => {
   useEffect(() => {
     fetchPages(dispatch)
     fetchMenu(dispatch)
+    fetchInfos(dispatch)
   }, [])
 
   return (
     <div>
-      {hasFetchMenu && hasFetchPages && !isLoadingPages && (
+      {hasFetchInfos && hasFetchMenu && hasFetchPages && !isLoadingPages && (
         <div className="app-root">
           <HashRouter>
             <Router isMenuFixe={isMenuFixe}>
