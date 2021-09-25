@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux'
 const translations = {
   phone: 'Téléphone',
   address: 'Adresse postale',
-  mail: 'Adresse mail'
+  mail: 'Adresse mail',
+  facebook: 'Facebook'
 }
 
 const InfosAdmin = () => {
@@ -24,7 +25,8 @@ const InfosAdmin = () => {
         FormComponent={InfosForm}
         propertiesSelector={getInfos}
         properties={[
-          { name: 'tag', render: (entity) => translations[entity.tag] },
+          { name: '', render: (entity) => translations[entity.tag] },
+          { name: 'tag', render: (entity) => entity.tag },
           'id',
           'value'
         ]}
