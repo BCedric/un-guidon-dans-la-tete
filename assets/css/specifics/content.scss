@@ -5,15 +5,15 @@
 
   iframe {
     max-width: 100%;
-
   }
 
-  img{
+  img {
     max-width: 100%;
     height: auto !important;
-    &:not(.icon) {
-    border: 1px solid black;
-  }}
+    &:not(.icon):not(.page-heading-img) {
+      border: 1px solid black;
+    }
+  }
 
   &.menu-fixed {
     margin-top: 72px;

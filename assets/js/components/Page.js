@@ -40,7 +40,6 @@ const Page = ({ tag }) => {
 
   return (
     <div className="page-container">
-      {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
       {page != null && (
         <>
           {page.headingImg != null && (
@@ -52,6 +51,7 @@ const Page = ({ tag }) => {
           )}
         </>
       )}
+      {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
       <div className="page-content">
         {page != null && (
           <>
