@@ -29,6 +29,7 @@ class Page
 
     /**
      * @ORM\ManyToOne(targetEntity=Media::class)
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $headingImg;
 
