@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 import { getPageByTag } from 'store/pages/pagesSlice'
 import { getMenuItems } from 'store/pages/menuSlice'
 import { getInfos } from 'store/pages/infosSlice'
-import Counter from './Counter'
 import MobileWorkshopsCalendar from './MobileWorkshopsCalendar'
 
 const Page = ({ tag }) => {
