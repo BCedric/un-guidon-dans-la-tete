@@ -19,4 +19,10 @@ const infosApi = {
   info: (id) => `/info/${id}`
 }
 
-export { pageApi, mediaApi, menuApi, infosApi }
+const mobileWorkshopApi = {
+  mobileWorkshops: () => `/mobile-workshop`,
+  mobileWorkshopsComing: () => `/mobile-workshop/coming`,
+  mobileWorkshop: (id) => `/mobile-workshop/${id}`
+}
+
+export { pageApi, mediaApi, menuApi, infosApi, mobileWorkshopApi }

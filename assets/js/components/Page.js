@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
+import ReactDOMServer from 'react-dom/server'
+
 import { useSelector } from 'react-redux'
 import { getPageByTag } from 'store/pages/pagesSlice'
 import { getMenuItems } from 'store/pages/menuSlice'
 import { getInfos } from 'store/pages/infosSlice'
+import Counter from './Counter'
+import MobileWorkshopsCalendar from './MobileWorkshopsCalendar'
 
 const Page = ({ tag }) => {
+  const componentsTranslations = {
+    mobile_workshops: MobileWorkshopsCalendar()
+  }
   const pagesFilter = useSelector(getPageByTag)
   const infos = useSelector(getInfos)
 
@@ -32,7 +39,14 @@ const Page = ({ tag }) => {
       const end = content.indexOf(']]')
       const strToReplace = content.substring(start + 2, end).trim()
       const valueObj = infos.find((info) => info.tag === strToReplace)
-      const strToInsert = valueObj != null ? valueObj.value : ''
+      var strToInsert = valueObj != null ? valueObj.value : ''
+      if (componentsTranslations[strToReplace] != null) {
+        strToInsert = ReactDOMServer.renderToString(
+          componentsTranslations[strToReplace]
+        )
+      } else {
+        strToInsert = valueObj != null ? valueObj.value : ''
+      }
       content = content.slice(0, start) + strToInsert + content.slice(end + 2)
     }
     return content
