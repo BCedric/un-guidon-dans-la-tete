@@ -2,6 +2,7 @@ const Encore = require('@symfony/webpack-encore')
 
 const fs = require('fs')
 var path = require('path')
+var dotenv = require('dotenv')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -72,6 +73,15 @@ Encore
     store: path.resolve(__dirname, 'assets/js/store'),
     generics: path.resolve(__dirname, 'assets/js/generics'),
     imgs: path.resolve(__dirname, 'assets/imgs')
+  })
+  .configureDefinePlugin((options) => {
+    const env = dotenv.config()
+    const envConfig = dotenv.parse(fs.readFileSync('.env.local'))
+    if (env.error) {
+      throw env.error
+    }
+
+    options['process.env'].API_TOKEN = JSON.stringify(envConfig['API_TOKEN'])
   })
 
 // uncomment to get integrity="..." attributes on your script & link tags

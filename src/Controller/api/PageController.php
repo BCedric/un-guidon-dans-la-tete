@@ -57,14 +57,14 @@ class PageController extends AbstractController
         $page = new Page();
         $body['headingImg'] != null && $body['headingImg'] = $mediaRepository->findOneBy(['id' => $body['headingImg']]);
         $page->setPage($body);
-        
+
         $em->persist($page);
         $em->flush();
         return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
             return $object->getId();
         }]));
     }
-    
+
     /**
      * @Route("/{id}", name="put_page", methods={"PUT"})
      */
