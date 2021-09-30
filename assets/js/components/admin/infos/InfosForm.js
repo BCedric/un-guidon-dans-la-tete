@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { TextField } from '@material-ui/core'
+import { TextField } from '@mui/material'
 
 import { putInfo } from 'store/pages/infosSlice'
 

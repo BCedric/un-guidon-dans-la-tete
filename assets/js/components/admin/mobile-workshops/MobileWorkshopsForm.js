@@ -3,15 +3,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import moment from 'moment'
-import MomentUtils from '@date-io/moment'
 
-import { TextField } from '@material-ui/core'
-
-import {
-  KeyboardDatePicker,
-  KeyboardTimePicker,
-  MuiPickersUtilsProvider
-} from '@material-ui/pickers'
+import { TextField } from '@mui/material'
 
 import CustomForm from 'generics/components/CustomForm'
 
@@ -34,11 +27,10 @@ const MobileWorkshopsForm = ({ cancel, entity }) => {
 
   useEffect(() => {
     if (entity != null) {
-      console.log(entity)
       initFormFields({
-        startTime: moment(entity.startDate),
-        endTime: moment(entity.endDate),
-        date: moment(entity.startDate),
+        startTime: moment(entity.startDate).format('HH:mm'),
+        endTime: moment(entity.endDate).format('HH:mm'),
+        date: moment(entity.startDate).format('yyyy-MM-DD'),
         place: entity.place,
         event: entity.eventName
       })
@@ -54,16 +46,8 @@ const MobileWorkshopsForm = ({ cancel, entity }) => {
   }, [entity])
 
   const submit = () => {
-    console.log(
-      date.format('DD/MM/yyyy'),
-      startTime.format('HH:mm'),
-      endTime.format('HH:mm'),
-      place,
-      event
-    )
-    const dateFormatted = date.format('yyyy-MM-DD')
-    const startDate = `${dateFormatted} ${startTime.format('HH:mm')}`
-    const endDate = `${dateFormatted} ${endTime.format('HH:mm')}`
+    const startDate = `${date} ${startTime}`
+    const endDate = `${date} ${endTime}`
     if (entity != null) {
       return putMobileWorkshop(
         entity.id,
@@ -74,48 +58,43 @@ const MobileWorkshopsForm = ({ cancel, entity }) => {
 
     return postMobileWorkshop({ startDate, endDate, place, event }, dispatch)
   }
+
   return (
     <CustomForm onSubmit={submit} onCancel={cancel} isFormValid={isFormValid}>
       <div className="form-line">
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            format="DD/MM/yyyy"
-            margin="normal"
-            id="date-picker-inline"
-            label="Date"
-            value={date}
-            onChange={setDate}
-            KeyboardButtonProps={{
-              'aria-label': 'change date'
-            }}
-          />
-          <KeyboardTimePicker
-            margin="normal"
-            id="time-picker"
-            label="Début"
-            format="HH:mm"
-            value={startTime}
-            onChange={setStartTime}
-            ampm={false}
-            KeyboardButtonProps={{
-              'aria-label': 'change time'
-            }}
-          />
-          <KeyboardTimePicker
-            margin="normal"
-            id="time-picker"
-            label="Fin"
-            format="HH:mm"
-            value={endTime}
-            onChange={setEndTime}
-            ampm={false}
-            KeyboardButtonProps={{
-              'aria-label': 'change time'
-            }}
-          />
-        </MuiPickersUtilsProvider>
+        <TextField
+          label="Début"
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          InputLabelProps={{
+            shrink: true
+          }}
+          inputProps={{
+            step: 300 // 5 min
+          }}
+        />
+        <TextField
+          label="Fin"
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          InputLabelProps={{
+            shrink: true
+          }}
+          inputProps={{
+            step: 300 // 5 min
+          }}
+        />
+        <TextField
+          label="Fin"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
       </div>
       <div className="form-line">
         <TextField

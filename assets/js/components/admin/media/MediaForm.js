@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CustomForm from 'generics/components/CustomForm'
 import { useDispatch } from 'react-redux'
 import { postMedia } from 'store/pages/mediaSlice'
-import { Input } from '@material-ui/core'
+import { Input } from '@mui/material'
 
 const MediaForm = ({ cancel }) => {
   const [isFormValid, setIsFormValid] = useState(false)

@@ -11,7 +11,7 @@ import {
   MenuItem,
   Select,
   TextField
-} from '@material-ui/core'
+} from '@mui/material'
 
 import useForm from 'generics/hooks/useForm'
 import CustomForm from 'generics/components/CustomForm'

@@ -9,7 +9,7 @@ import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 import { fetchMedias, getMedias, deleteMedia } from 'store/pages/mediaSlice'
 
 import MediaForm from './MediaForm'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 
 const MediaAdmin = () => {
   const dispatch = useDispatch()

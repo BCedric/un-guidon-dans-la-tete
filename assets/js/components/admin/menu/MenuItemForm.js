@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Select,
   TextField
-} from '@material-ui/core'
+} from '@mui/material'
 
 import { useDispatch, useSelector } from 'react-redux'
 
