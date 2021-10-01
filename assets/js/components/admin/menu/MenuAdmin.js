@@ -49,6 +49,8 @@ const MenuAdmin = () => {
           }
         ]}
         deleteEntity={deleteMenuItem}
+        filterFunction={(value) => (entity) =>
+          entity.name.toLowerCase().includes(value.toLowerCase())}
       />
     </div>
   )

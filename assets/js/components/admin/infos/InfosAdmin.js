@@ -32,6 +32,8 @@ const InfosAdmin = () => {
         ]}
         canAdd={false}
         canDelete={false}
+        filterFunction={(value) => (entity) =>
+          translations[entity.tag].toLowerCase().includes(value.toLowerCase())}
       />
     </div>
   )

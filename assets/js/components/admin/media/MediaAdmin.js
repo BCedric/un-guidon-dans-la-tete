@@ -62,6 +62,8 @@ const MediaAdmin = () => {
         ]}
         deleteEntity={deleteMedia}
         canEdit={false}
+        filterFunction={(value) => (entity) =>
+          entity.filename.toLowerCase().includes(value.toLowerCase())}
       />
     </div>
   )

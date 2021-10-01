@@ -40,6 +40,9 @@ const MobileWorkshopsAdmin = () => {
           { name: 'Lieu', render: (entity) => entity.place },
           { name: 'Evènement', render: (entity) => entity.eventName }
         ]}
+        filterFunction={(value) => (entity) =>
+          entity.place.toLowerCase().includes(value.toLowerCase()) ||
+          entity.eventName.toLowerCase().includes(value.toLowerCase())}
       />
     </div>
   )

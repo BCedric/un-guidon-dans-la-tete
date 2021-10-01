@@ -16,6 +16,8 @@ const PagesAdmin = () => {
         propertiesSelector={getPages}
         properties={['tag', 'id']}
         deleteEntity={deletePage}
+        filterFunction={(value) => (entity) =>
+          entity.tag.toLowerCase().includes(value.toLowerCase())}
       />
     </div>
   )

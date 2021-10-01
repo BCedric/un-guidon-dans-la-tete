@@ -35,4 +35,21 @@
     padding: 1em;
     background-color: $backgroundColor;
   }
+
+  .text-field-container {
+    padding: 1em;
+    background-color: white;
+    width: max-content;
+  }
+
+  .list-actions {
+    display: flex;
+    .add-action {
+      margin: 1em;
+    }
+  }
+}
+
+.admin-list {
+  background-color: white;
 }
