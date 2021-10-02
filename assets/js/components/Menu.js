@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getPages } from 'store/pages/pagesSlice'
 import { getMenuItems } from 'store/pages/menuSlice'
+import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 
 const Menu = ({ className }) => {
   const pages = useSelector(getPages)
@@ -14,6 +15,10 @@ const Menu = ({ className }) => {
   const isItemParent = (item) => item.children.length > 0
   const hasItemPage = (item) => item.page != null
   const isItemChild = (item) => item.parent != null
+
+  const { width } = useWindowDimensions()
+
+  const isSmallScreen = width < 768
 
   const renderItem = (item, index, parent) => {
     if (
@@ -41,6 +46,19 @@ const Menu = ({ className }) => {
     setTags(pages.map((page) => page.tag))
   }, [pages])
 
+  const toggleSideMenu = (e) => {
+    e.stopPropagation()
+    var specifiedElement = document.getElementById('side-menu')
+    if (
+      specifiedElement != null &&
+      specifiedElement.classList.contains('hidden')
+    ) {
+      specifiedElement.classList.remove('hidden')
+    } else {
+      specifiedElement.classList.add('hidden')
+    }
+  }
+
   return (
     <div>
       <div className="bike-icon-container">
@@ -48,7 +66,16 @@ const Menu = ({ className }) => {
       </div>
       <nav className={className}>
         <ul className="first-level">
-          {menuItems.map((item, index) => renderItem(item, index, null))}
+          {isSmallScreen ? (
+            <span
+              className="sidemenu-toggle clickable material-icons"
+              onClick={toggleSideMenu}
+            >
+              menu
+            </span>
+          ) : (
+            menuItems.map((item, index) => renderItem(item, index, null))
+          )}
         </ul>
       </nav>
     </div>
