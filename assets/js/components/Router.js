@@ -4,9 +4,11 @@ import { Route, Switch, useLocation } from 'react-router-dom'
 
 import { getPages } from 'store/pages/pagesSlice'
 import routes from 'constants/routes-const'
+import { getMenuItems } from 'store/pages/menuSlice'
+
+import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 
 import Page from './Page'
-import { getMenuItems } from '../store/pages/menuSlice'
 
 const Router = (props) => {
   const pages = useSelector(getPages)
@@ -15,18 +17,22 @@ const Router = (props) => {
   const isInAdmin = location.pathname.includes('admin')
 
   const firstElement = () => {
-    if(menuItems.length === 0) {
+    if (menuItems.length === 0) {
       return null
     }
     const item = menuItems[0]
     return item.children.length > 0 ? item.children[0].page : item.page
   }
 
+  const { width } = useWindowDimensions()
+
+  const isSmallScreen = width < 768
+
   return (
     <>
       {props.children}
       <div className={`content ${props.isMenuFixe ? 'menu-fixed' : ''}`}>
-        {!isInAdmin && <div className="margin-left"></div>}
+        {!isInAdmin && !isSmallScreen && <div className="margin-left"></div>}
         <Switch>
           {pages.length > 0 && (
             <Route
@@ -51,7 +57,7 @@ const Router = (props) => {
             ></Route>
           ))}
         </Switch>
-        {!isInAdmin && <div className="margin-right"></div>}
+        {!isInAdmin && !isSmallScreen && <div className="margin-right"></div>}
       </div>
     </>
   )

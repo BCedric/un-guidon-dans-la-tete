@@ -55,6 +55,11 @@ const SideMenu = ({ menu }) => {
   return (
     <div id="side-menu" className="side-menu hidden">
       <ul className=" first-level">
+        <div className="close-side-menu">
+          <span className="clickable material-icons" onClick={close}>
+            close
+          </span>
+        </div>
         {menu.map((item, index) => renderItem(item, index, null))}
       </ul>
     </div>

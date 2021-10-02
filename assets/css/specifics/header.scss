@@ -11,6 +11,14 @@
   background-size: 100%;
   background-position: 20%;
 
+  .header-img {
+    display: flex;
+    img {
+      max-width: 95%;
+      margin: 0 auto;
+    }
+  }
+
   & > div {
     width: 100%;
   }

@@ -33,7 +33,7 @@
   h1 {
     text-align: center;
     font-size: 2.5em;
-    margin: 1em 2em;
+    margin: 1em 0em;
   }
 
   h2 {
@@ -71,10 +71,17 @@
     flex-direction: column;
     width: $contentWidth;
     background-color: $backgroundColor;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .page-content {
     padding: 1em 2em;
+
+    @media screen and (max-width: 768px) {
+      padding: 1em 1em;
+    }
     height: 100%;
   }
 }

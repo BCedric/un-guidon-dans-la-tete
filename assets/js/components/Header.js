@@ -17,7 +17,7 @@ const Header = ({ isMenuFixe = false }) => {
   return (
     <div className="header">
       <SideMenu menu={menuItems} />
-      <Link to={`/`}>
+      <Link className="header-img" to={`/`}>
         <img src={logo} />
       </Link>
       <Menu className={isMenuFixe ? 'fixe' : ''} />
