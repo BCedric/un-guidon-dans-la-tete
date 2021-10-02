@@ -8,8 +8,12 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api_media:
+            pattern: ^/api/media
+            security: false
+            methods: [GET]
         api:
-            pattern: ^/api/
+            pattern: ^/api
             stateless: true
             provider: token_api
             custom_authenticators:
