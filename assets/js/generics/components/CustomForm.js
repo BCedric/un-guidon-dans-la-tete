@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from '@mui/material'
 
 const CustomForm = ({
+  className,
   children,
   onCancel = () => {},
   onSubmit = () => {},
@@ -15,7 +16,7 @@ const CustomForm = ({
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={onFormSubmit} className={className}>
       {children}
       <div className="form-buttons-container">
         <Button

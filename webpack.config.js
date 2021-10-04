@@ -82,6 +82,9 @@ Encore
     }
 
     options['process.env'].API_TOKEN = JSON.stringify(envConfig['API_TOKEN'])
+    options['process.env'].ADMIN_LOGIN = JSON.stringify(
+      envConfig['ADMIN_LOGIN']
+    )
   })
 
 // uncomment to get integrity="..." attributes on your script & link tags

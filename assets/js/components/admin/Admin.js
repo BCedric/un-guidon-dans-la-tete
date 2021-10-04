@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminMenu from './AdminMenu'
 import InfosAdmin from './infos/InfosAdmin'
+import LoginAdmin from './LoginAdmin'
 
 import MediaAdmin from './media/MediaAdmin'
 import MenuAdmin from './menu/MenuAdmin'
@@ -16,7 +17,11 @@ const menuAdminItems = [
 ]
 
 const Admin = () => {
-  return <AdminMenu items={menuAdminItems}></AdminMenu>
+  return (
+    <LoginAdmin>
+      <AdminMenu items={menuAdminItems}></AdminMenu>
+    </LoginAdmin>
+  )
 }
 
 export default Admin
