@@ -60,10 +60,13 @@
     }
   }
 
-  .page-heading-img {
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
+  .page-heading-img-container {
+    height: 500px;
+    .page-heading-img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
   }
 
   .page-container {

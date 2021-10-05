@@ -53,16 +53,14 @@ const Page = ({ tag }) => {
 
   return (
     <div className="page-container">
-      {page != null && (
-        <>
-          {page.headingImg != null && (
-            <img
-              style={{ objectPosition: `0 ${page.headingImgPosition}%` }}
-              className="page-heading-img"
-              src={`${window.BASE_URL}/api/media/${page.headingImg.filename}`}
-            />
-          )}
-        </>
+      {page != null && page.headingImg != null && (
+        <div className="page-heading-img-container">
+          <img
+            style={{ objectPosition: `0 ${page.headingImgPosition}%` }}
+            className="page-heading-img"
+            src={`${window.BASE_URL}/api/media/${page.headingImg.filename}`}
+          />
+        </div>
       )}
       {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
       <div className="page-content">
