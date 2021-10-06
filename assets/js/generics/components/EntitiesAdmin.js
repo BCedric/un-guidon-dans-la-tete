@@ -32,6 +32,12 @@ const EntitiesAdmin = ({
   return (
     <div>
       <h2>{title}</h2>
+      {displayForm && (
+        <FormComponent
+          cancel={() => setDisplayForm(false)}
+          entity={selectedEntity}
+        />
+      )}
       <div className="admin-list">
         <div className="list-actions">
           {canAdd && (
@@ -76,12 +82,6 @@ const EntitiesAdmin = ({
           canDelete={canDelete}
           filterFunction={filterFunction}
         />
-        {displayForm && (
-          <FormComponent
-            cancel={() => setDisplayForm(false)}
-            entity={selectedEntity}
-          />
-        )}
       </div>
     </div>
   )
