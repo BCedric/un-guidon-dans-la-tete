@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Button } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 
 const CustomForm = ({
   className,
@@ -10,9 +10,17 @@ const CustomForm = ({
   isFormDirty = true,
   isFormValid = true
 }) => {
+  const [isSubmitting, setIsSubmitting] = useState()
+
   const onFormSubmit = (e) => {
+    setIsSubmitting(true)
     e.preventDefault()
-    onSubmit(e).then(onCancel)
+    onSubmit(e)
+      .then((res) => {
+        setIsSubmitting(false)
+        return res
+      })
+      .then(onCancel)
   }
 
   return (
@@ -25,6 +33,7 @@ const CustomForm = ({
           disabled={!isFormDirty || !isFormValid}
         >
           Valider
+          {isSubmitting && <CircularProgress />}
         </Button>
         <Button variant="contained" type="button" onClick={onCancel}>
           Annuler
