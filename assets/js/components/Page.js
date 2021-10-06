@@ -18,10 +18,19 @@ const Page = ({ tag }) => {
   const menuItems = useSelector(getMenuItems)
   const [page, setPage] = useState(null)
   const [currentMenuItem, setCurrentMenuItem] = useState(null)
+  const [isImgLoaded, setIsImgLoaded] = useState(false)
 
   useEffect(() => {
     setPage(pagesFilter(tag))
   }, [])
+
+  useEffect(() => {
+    if (page != null && page.headingImg != null) {
+      setIsImgLoaded(false)
+    } else {
+      setIsImgLoaded(true)
+    }
+  }, [page])
 
   useEffect(() => {
     if (menuItems != null && page != null) {
@@ -59,17 +68,22 @@ const Page = ({ tag }) => {
             style={{ objectPosition: `0 ${page.headingImgPosition}%` }}
             className="page-heading-img"
             src={`${window.BASE_URL}/api/media/${page.headingImg.filename}`}
+            onLoad={(e) => setIsImgLoaded(true)}
           />
         </div>
       )}
-      {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
-      <div className="page-content">
-        {page != null && (
-          <>
-            <div dangerouslySetInnerHTML={{ __html: getContent() }}></div>
-          </>
-        )}
-      </div>
+      {isImgLoaded && (
+        <>
+          {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
+          <div className="page-content">
+            {page != null && (
+              <>
+                <div dangerouslySetInnerHTML={{ __html: getContent() }}></div>
+              </>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }
