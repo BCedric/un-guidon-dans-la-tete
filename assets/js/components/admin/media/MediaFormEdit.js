@@ -40,6 +40,24 @@ const MediaFormEdit = ({ cancel, entity }) => {
           type="text"
         ></TextField>
       </div>
+      <p className="spaced-inline informations">
+        <span
+          className="material-icons"
+          style={{ fontSize: '2em', color: 'darkred' }}
+        >
+          warning_amber
+        </span>
+        <span>
+          Le changement du nom du média change également son lien (penser à
+          changer les liens dans le contenu des pages qui l'utilisent)
+        </span>
+        <span
+          className="material-icons"
+          style={{ fontSize: '2em', color: 'darkred' }}
+        >
+          warning_amber
+        </span>
+      </p>
     </CustomForm>
   )
 }

@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import { Button, TextField } from '@mui/material'
 
-import CustomForm from 'generics/components/CustomForm'
-
 const LoginAdmin = ({ children }) => {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
