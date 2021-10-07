@@ -27,6 +27,11 @@ export const postMedia = (media, dispatch) =>
     dispatch(setMedias(medias))
   )
 
+export const putMedia = (id, media, dispatch) =>
+  Http.put(mediaApi.media(id), media).then((medias) =>
+    dispatch(setMedias(medias))
+  )
+
 export const deleteMedia = (id, dispatch) =>
   Http.delete(mediaApi.media(id)).then((medias) => dispatch(setMedias(medias)))
 

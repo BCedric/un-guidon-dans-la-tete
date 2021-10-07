@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 
@@ -9,6 +9,7 @@ import EntitiesList from './EntitiesList'
 const EntitiesAdmin = ({
   title,
   FormComponent,
+  EditFormComponent = null,
   propertiesSelector,
   properties,
   deleteEntity,
@@ -21,8 +22,16 @@ const EntitiesAdmin = ({
   const dispatch = useDispatch()
 
   const [displayForm, setDisplayForm] = useState(false)
+  const [displayEditForm, setDisplayEditForm] = useState(false)
   const [selectedEntity, setSelectedEntity] = useState(null)
   const [filterValue, setFilterValue] = useState('')
+  const [EditForm, setEditForm] = useState(null)
+
+  useEffect(() => {
+    setEditForm(() =>
+      EditFormComponent != null ? EditFormComponent : FormComponent
+    )
+  }, [EditFormComponent, FormComponent])
 
   const filteredEntities =
     filterFunction == null
@@ -32,9 +41,10 @@ const EntitiesAdmin = ({
   return (
     <div>
       <h2>{title}</h2>
-      {displayForm && (
-        <FormComponent
-          cancel={() => setDisplayForm(false)}
+      {displayForm && <FormComponent cancel={() => setDisplayForm(false)} />}
+      {displayEditForm && (
+        <EditForm
+          cancel={() => setDisplayEditForm(false)}
           entity={selectedEntity}
         />
       )}
@@ -43,7 +53,11 @@ const EntitiesAdmin = ({
           {canAdd && (
             <span
               className="add-action clickable material-icons"
-              onClick={() => (setSelectedEntity(null), setDisplayForm(true))}
+              onClick={() => (
+                setSelectedEntity(null),
+                setDisplayForm(true),
+                setDisplayEditForm(false)
+              )}
             >
               add
             </span>
@@ -77,7 +91,11 @@ const EntitiesAdmin = ({
           onDelete={(id) => {
             deleteEntity(id, dispatch)
           }}
-          onEdit={(entity) => (setSelectedEntity(entity), setDisplayForm(true))}
+          onEdit={(entity) => (
+            setSelectedEntity(entity),
+            setDisplayEditForm(true),
+            setDisplayForm(false)
+          )}
           canEdit={canEdit}
           canDelete={canDelete}
           filterFunction={filterFunction}

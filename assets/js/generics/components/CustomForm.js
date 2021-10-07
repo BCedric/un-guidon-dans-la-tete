@@ -31,7 +31,7 @@ const CustomForm = ({
           className="spaced-inline"
           variant="contained"
           type="submit"
-          disabled={!isFormDirty || !isFormValid}
+          disabled={!isFormDirty || !isFormValid || isSubmitting}
         >
           <span>Valider</span>
           {isSubmitting && <CircularProgress color="inherit" size={20} />}

@@ -79,4 +79,19 @@ class MediaController extends AbstractController
 
         return $this->index($mediaRepository);
     }
+
+    /**
+     * @Route("/{id}", name="put_media", methods={"PUT"})
+     */
+    public function put(string $id, Request $request, MediaRepository $mediaRepository, EntityManagerInterface $em)
+    {
+        $body = json_decode($request->getContent(), true);
+        $media = $mediaRepository->findOneBy(['id' => $id]);
+        rename($this->directory . '/' . $media->getFilename(), $this->directory . '/' . $body['filename']);
+        $media->setFilename($body['filename']);
+        $em->flush();
+
+        return $this->index($mediaRepository);
+
+    }
 }

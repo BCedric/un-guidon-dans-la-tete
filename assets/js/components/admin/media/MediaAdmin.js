@@ -10,6 +10,7 @@ import { fetchMedias, getMedias, deleteMedia } from 'store/pages/mediaSlice'
 
 import MediaForm from './MediaForm'
 import { Button } from '@mui/material'
+import MediaFormEdit from './MediaFormEdit'
 
 const MediaAdmin = () => {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const MediaAdmin = () => {
       <EntitiesAdmin
         title="Medias"
         FormComponent={MediaForm}
+        EditFormComponent={MediaFormEdit}
         propertiesSelector={getMedias}
         properties={[
           'id',
@@ -61,7 +63,6 @@ const MediaAdmin = () => {
           }
         ]}
         deleteEntity={deleteMedia}
-        canEdit={false}
         filterFunction={(value) => (entity) =>
           entity.filename.toLowerCase().includes(value.toLowerCase())}
       />
