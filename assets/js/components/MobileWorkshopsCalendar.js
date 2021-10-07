@@ -18,6 +18,9 @@ const MobileWorkshopsCalendar = () => {
   return (
     <div className="mobile-workshop-calendar">
       <ul>
+        {workshops.length === 0 && (
+          <p>Aucun atelier mobile n'est prévu pour l'instant</p>
+        )}
         {workshops.map((workshop, index) => (
           <li key={index}>
             <span className="date">
