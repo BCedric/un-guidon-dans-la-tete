@@ -10,6 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -70,9 +71,16 @@ class MediaController extends AbstractController
     {
         $media = new Media();
         $uploadedFile = $request->files->get('file');
-        $media->setFilename($uploadedFile->getClientOriginalName());
+
+        $filename = $uploadedFile->getClientOriginalName();
+
+        if ($mediaRepository->findOneBy(['filename' => $filename])) {
+            return new Response('Un fichier de ce nom existe déjà', 500);
+        }
+
+        $media->setFilename($filename);
         $media->setType($uploadedFile->getMimeType());
-        $uploadedFile->move($this->directory . '/', $uploadedFile->getClientOriginalName());
+        $uploadedFile->move($this->directory . '/', $filename);
 
         $em->persist($media);
         $em->flush();
@@ -86,9 +94,15 @@ class MediaController extends AbstractController
     public function put(string $id, Request $request, MediaRepository $mediaRepository, EntityManagerInterface $em)
     {
         $body = json_decode($request->getContent(), true);
+        $filename = $body['filename'];
+
+        if ($mediaRepository->findOneBy(['filename' => $filename])) {
+            return new Response('Un fichier de ce nom existe déjà', 500);
+        }
+
         $media = $mediaRepository->findOneBy(['id' => $id]);
-        rename($this->directory . '/' . $media->getFilename(), $this->directory . '/' . $body['filename']);
-        $media->setFilename($body['filename']);
+        rename($this->directory . '/' . $media->getFilename(), $this->directory . '/' . $filename);
+        $media->setFilename($filename);
         $em->flush();
 
         return $this->index($mediaRepository);
