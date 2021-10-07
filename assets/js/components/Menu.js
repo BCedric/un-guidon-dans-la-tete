@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getPages } from 'store/pages/pagesSlice'
-import { getMenuItems } from 'store/pages/menuSlice'
+import { getPages } from 'store/pagesSlice'
+import { getMenuItems } from 'store/menuSlice'
 import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 
 const Menu = ({ className }) => {

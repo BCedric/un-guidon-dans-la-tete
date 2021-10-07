@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 import InfosForm from './InfosForm'
-import { fetchInfos, getInfos } from 'store/pages/infosSlice'
+import { fetchInfos, getInfos } from 'store/infosSlice'
 import { useDispatch } from 'react-redux'
 
 const translations = {

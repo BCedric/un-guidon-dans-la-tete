@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { TextField } from '@mui/material'
 
-import { putInfo } from 'store/pages/infosSlice'
+import { putInfo } from 'store/infosSlice'
 
 import CustomForm from 'generics/components/CustomForm'
 import { useDispatch } from 'react-redux'

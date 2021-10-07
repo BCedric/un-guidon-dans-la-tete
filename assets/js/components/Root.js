@@ -6,10 +6,10 @@ import { HashRouter, Route, Switch, useParams } from 'react-router-dom'
 
 import Header from './Header'
 
-import { fetchPages } from 'store/pages/pagesSlice'
-import { fetchMenu } from 'store/pages/menuSlice'
-import { getHasFetchMenu } from 'store/pages/menuSlice'
-import { getHasFetchInfos, fetchInfos } from 'store/pages/infosSlice'
+import { fetchPages } from 'store/pagesSlice'
+import { fetchMenu } from 'store/menuSlice'
+import { getHasFetchMenu } from 'store/menuSlice'
+import { getHasFetchInfos, fetchInfos } from 'store/infosSlice'
 
 import Router from './Router'
 import Footer from './Footer'

@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import CustomForm from 'generics/components/CustomForm'
 import useForm from 'generics/hooks/useForm'
-import { getPages } from 'store/pages/pagesSlice'
-import { postMenuItem, getMenuItems, putMenuItem } from 'store/pages/menuSlice'
+import { getPages } from 'store/pagesSlice'
+import { postMenuItem, getMenuItems, putMenuItem } from 'store/menuSlice'
 
 const MenuItemForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormDirty } = useForm()

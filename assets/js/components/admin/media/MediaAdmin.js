@@ -6,7 +6,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 
-import { fetchMedias, getMedias, deleteMedia } from 'store/pages/mediaSlice'
+import { fetchMedias, getMedias, deleteMedia } from 'store/mediaSlice'
 
 import MediaForm from './MediaForm'
 import { Button } from '@mui/material'

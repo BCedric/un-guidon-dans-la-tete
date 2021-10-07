@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CustomForm from 'generics/components/CustomForm'
 import { useDispatch } from 'react-redux'
-import { putMedia } from 'store/pages/mediaSlice'
+import { putMedia } from 'store/mediaSlice'
 import { TextField } from '@mui/material'
 
 const MediaFormEdit = ({ cancel, entity }) => {

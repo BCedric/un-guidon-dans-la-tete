@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchMenu, deleteMenuItem, getMenuItems } from 'store/pages/menuSlice'
+import { fetchMenu, deleteMenuItem, getMenuItems } from 'store/menuSlice'
 
 import EntitiesAdmin from 'generics/components/EntitiesAdmin'
 

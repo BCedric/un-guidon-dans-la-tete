@@ -13,7 +13,7 @@ import useForm from 'generics/hooks/useForm'
 import {
   putMobileWorkshop,
   postMobileWorkshop
-} from 'store/pages/mobileWorkshopsSlice'
+} from 'store/mobileWorkshopsSlice'
 
 const MobileWorkshopsForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormValid } = useForm()

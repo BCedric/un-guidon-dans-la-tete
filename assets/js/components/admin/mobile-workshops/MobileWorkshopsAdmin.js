@@ -8,7 +8,7 @@ import {
   fetchMobileWorkshops,
   getMobileWorkshops,
   deleteMobileWorkshop
-} from 'store/pages/mobileWorkshopsSlice'
+} from 'store/mobileWorkshopsSlice'
 import { useDispatch } from 'react-redux'
 
 const MobileWorkshopsAdmin = () => {

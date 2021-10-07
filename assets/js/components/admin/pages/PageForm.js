@@ -16,8 +16,8 @@ import useForm from 'generics/hooks/useForm'
 import CustomForm from 'generics/components/CustomForm'
 import Wysiwyg from 'generics/components/Wysiwyg'
 
-import { postPage, putPage } from 'store/pages/pagesSlice'
-import { getMedias, fetchMedias } from 'store/pages/mediaSlice'
+import { postPage, putPage } from 'store/pagesSlice'
+import { getMedias, fetchMedias } from 'store/mediaSlice'
 
 const PageForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormValid } = useForm()

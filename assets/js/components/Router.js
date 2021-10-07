@@ -2,9 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
 
-import { getPages } from 'store/pages/pagesSlice'
+import { getPages } from 'store/pagesSlice'
 import routes from 'constants/routes-const'
-import { getMenuItems } from 'store/pages/menuSlice'
+import { getMenuItems } from 'store/menuSlice'
 
 import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 

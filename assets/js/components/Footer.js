@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getInfos } from 'store/pages/infosSlice'
+import { getInfos } from 'store/infosSlice'
 import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 
 const Footer = () => {

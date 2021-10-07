@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import mediasReducer from './pages/mediaSlice'
-import pagesReducer from './pages/pagesSlice'
-import menuReducer from './pages/menuSlice'
-import infosRedicer from './pages/infosSlice'
-import mobileWorkshopsReducer from './pages/mobileWorkshopsSlice'
+import mediasReducer from './mediaSlice'
+import pagesReducer from './pagesSlice'
+import menuReducer from './menuSlice'
+import infosRedicer from './infosSlice'
+import mobileWorkshopsReducer from './mobileWorkshopsSlice'
 
 export default configureStore({
   reducer: {
