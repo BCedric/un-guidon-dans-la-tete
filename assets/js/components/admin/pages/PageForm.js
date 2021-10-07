@@ -18,6 +18,7 @@ import Wysiwyg from 'generics/components/Wysiwyg'
 
 import { postPage, putPage } from 'store/pagesSlice'
 import { getMedias, fetchMedias } from 'store/mediaSlice'
+import { addMessage } from 'store/messagesSlice'
 
 const PageForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormValid } = useForm()
@@ -64,9 +65,15 @@ const PageForm = ({ cancel, entity }) => {
       headingImgPosition
     }
     if (entity == null) {
-      return postPage(newPage, dispatch)
+      return postPage(newPage, dispatch).then((res) => {
+        dispatch(addMessage({ content: 'Ajout de la page avec succès' }))
+        return res
+      })
     } else {
-      return putPage(entity.id, newPage, dispatch)
+      return putPage(entity.id, newPage, dispatch).then((res) => {
+        dispatch(addMessage({ content: 'Mise à jour de la page avec succès' }))
+        return res
+      })
     }
   }
 

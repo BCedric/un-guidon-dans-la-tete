@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import CustomForm from 'generics/components/CustomForm'
+
 import { useDispatch } from 'react-redux'
-import { putMedia } from 'store/mediaSlice'
+
 import { TextField } from '@mui/material'
+
+import CustomForm from 'generics/components/CustomForm'
+
+import { putMedia } from 'store/mediaSlice'
+import { addMessage } from 'store/messagesSlice'
 
 const MediaFormEdit = ({ cancel, entity }) => {
   const [filename, setFilename] = useState('')
@@ -20,7 +25,10 @@ const MediaFormEdit = ({ cancel, entity }) => {
       entity.id,
       { filename: `${filename}${entity.filename.substring(lastDotIndex)}` },
       dispatch
-    )
+    ).then((res) => {
+      dispatch(addMessage({ content: 'Mise à jour du média avec succès' }))
+      return res
+    })
   }
 
   const isFormValid = filename != entity.filename && filename != ''

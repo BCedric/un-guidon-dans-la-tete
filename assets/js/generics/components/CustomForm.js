@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
 import { Button, CircularProgress } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { addMessage } from 'store/messagesSlice'
 
 const CustomForm = ({
   className,
@@ -11,6 +13,7 @@ const CustomForm = ({
   isFormValid = true
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const dispatch = useDispatch()
 
   const onFormSubmit = (e) => {
     setIsSubmitting(true)
@@ -21,6 +24,17 @@ const CustomForm = ({
         return res
       })
       .then(onCancel)
+      .catch(
+        (error) => (
+          setIsSubmitting(false),
+          dispatch(
+            addMessage({
+              content: `Erreur : ${error.response.data}`,
+              severity: 'error'
+            })
+          )
+        )
+      )
   }
 
   return (

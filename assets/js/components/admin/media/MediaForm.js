@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import CustomForm from 'generics/components/CustomForm'
-import { useDispatch } from 'react-redux'
-import { postMedia } from 'store/mediaSlice'
+
 import { Input } from '@mui/material'
+
+import { useDispatch } from 'react-redux'
+
+import CustomForm from 'generics/components/CustomForm'
+
+import { postMedia } from 'store/mediaSlice'
+import { addMessage } from 'store/messagesSlice'
 
 const MediaForm = ({ cancel }) => {
   const [isFormValid, setIsFormValid] = useState(false)
@@ -13,7 +18,10 @@ const MediaForm = ({ cancel }) => {
   const submit = (e) => {
     const formData = new FormData()
     formData.append('file', file)
-    return postMedia(formData, dispatch)
+    return postMedia(formData, dispatch).then((res) => {
+      dispatch(addMessage({ content: 'Ajout du média avec succès' }))
+      return res
+    })
   }
 
   const handleFileChange = (e) => (

@@ -17,8 +17,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import CustomForm from 'generics/components/CustomForm'
 import useForm from 'generics/hooks/useForm'
+
 import { getPages } from 'store/pagesSlice'
 import { postMenuItem, getMenuItems, putMenuItem } from 'store/menuSlice'
+import { addMessage } from 'store/messagesSlice'
 
 const MenuItemForm = ({ cancel, entity }) => {
   const { resetForm, getFormField, initFormFields, isFormDirty } = useForm()
@@ -59,9 +61,15 @@ const MenuItemForm = ({ cancel, entity }) => {
       name
     }
     if (entity != null) {
-      return putMenuItem(entity.id, item, dispatch)
+      return putMenuItem(entity.id, item, dispatch).then((res) => {
+        dispatch(addMessage({ content: 'Mise à jour du menu avec succès' }))
+        return res
+      })
     } else {
-      return postMenuItem(item, dispatch)
+      return postMenuItem(item, dispatch).then((res) => {
+        dispatch(addMessage({ content: 'Ajout au menu avec succès' }))
+        return res
+      })
     }
   }
 

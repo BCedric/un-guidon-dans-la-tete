@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { HashRouter, Route, Switch, useParams } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import Header from './Header'
+
+import Messages from 'generics/components/Messages'
 
 import { fetchPages } from 'store/pagesSlice'
 import { fetchMenu } from 'store/menuSlice'
@@ -42,6 +44,7 @@ const Root = () => {
     <div>
       {hasFetchInfos && hasFetchMenu && hasFetchPages && !isLoadingPages && (
         <div className="app-root">
+          <Messages />
           <HashRouter>
             <Router isMenuFixe={isMenuFixe}>
               <Header isMenuFixe={isMenuFixe}></Header>

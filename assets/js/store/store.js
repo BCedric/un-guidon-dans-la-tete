@@ -5,6 +5,7 @@ import pagesReducer from './pagesSlice'
 import menuReducer from './menuSlice'
 import infosRedicer from './infosSlice'
 import mobileWorkshopsReducer from './mobileWorkshopsSlice'
+import messagesReducer from './messagesSlice'
 
 export default configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
     medias: mediasReducer,
     menu: menuReducer,
     infos: infosRedicer,
-    mobileWorkshops: mobileWorkshopsReducer
+    mobileWorkshops: mobileWorkshopsReducer,
+    messages: messagesReducer
   }
 })

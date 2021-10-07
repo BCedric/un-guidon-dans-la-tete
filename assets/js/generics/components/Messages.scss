@@ -1,0 +1,11 @@
+.messages-area {
+  position: fixed;
+  z-index: 10;
+  bottom: 1em;
+  left: 1em;
+
+  .info-message {
+    padding: 1em;
+    margin: 0.25em;
+  }
+}

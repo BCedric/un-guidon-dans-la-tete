@@ -75,7 +75,7 @@ class MediaController extends AbstractController
         $filename = $uploadedFile->getClientOriginalName();
 
         if ($mediaRepository->findOneBy(['filename' => $filename])) {
-            return new Response('Un fichier de ce nom existe déjà', 500);
+            return new Response('Un média avec ce nom existe déjà', 500);
         }
 
         $media->setFilename($filename);
@@ -97,7 +97,7 @@ class MediaController extends AbstractController
         $filename = $body['filename'];
 
         if ($mediaRepository->findOneBy(['filename' => $filename])) {
-            return new Response('Un fichier de ce nom existe déjà', 500);
+            return new Response('Un média avec ce nom existe déjà', 500);
         }
 
         $media = $mediaRepository->findOneBy(['id' => $id]);

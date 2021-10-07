@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import { TextField } from '@mui/material'
 
 import { putInfo } from 'store/infosSlice'
+import { addMessage } from 'store/messagesSlice'
 
 import CustomForm from 'generics/components/CustomForm'
-import { useDispatch } from 'react-redux'
 
 const InfosForm = ({ cancel, entity }) => {
   const [value, setValue] = useState('')
@@ -18,7 +20,12 @@ const InfosForm = ({ cancel, entity }) => {
   }, [entity])
 
   const submit = (e) => {
-    return putInfo(entity.id, { value }, dispatch)
+    return putInfo(entity.id, { value }, dispatch).then((res) => {
+      dispatch(
+        addMessage({ content: 'Mise à jour des informations avec succès' })
+      )
+      return res
+    })
   }
 
   const isFormValid = value !== ''
