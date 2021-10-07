@@ -31,7 +31,7 @@ class MediaController extends AbstractController
      */
     public function index(MediaRepository $mediaRepository)
     {
-        return new JsonResponse($this->normalizer->normalize($mediaRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
+        return new JsonResponse($this->normalizer->normalize($mediaRepository->findBy([], ['filename' => 'ASC']), null, ['circular_reference_handler' => function ($object) {
             return $object->getId();
         }]));
     }

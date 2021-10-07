@@ -42,7 +42,7 @@ class PageController extends AbstractController
      */
     public function index(PageRepository $pageRepository)
     {
-        $pages = $pageRepository->findAll();
+        $pages = $pageRepository->findBy([], ['tag' => 'ASC']);
         return new JsonResponse($this->normalizer->normalize($pages, null, ['circular_reference_handler' => function ($object) {
             return $object->getId();
         }]));
@@ -60,9 +60,7 @@ class PageController extends AbstractController
 
         $em->persist($page);
         $em->flush();
-        return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return $this->index($pageRepository);
     }
 
     /**
@@ -78,9 +76,8 @@ class PageController extends AbstractController
 
         $em->persist($page);
         $em->flush();
-        return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return $this->index($pageRepository);
+
     }
 
     /**
@@ -91,9 +88,6 @@ class PageController extends AbstractController
         $page = $pageRepository->findOneBy(['id' => $id]);
         $em->remove($page);
         $em->flush();
-        return new JsonResponse($this->normalizer->normalize($pageRepository->findAll(), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return $this->index($pageRepository);
     }
-
 }
