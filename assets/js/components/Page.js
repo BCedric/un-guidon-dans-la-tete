@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import ReactDOMServer from 'react-dom/server'
 
@@ -19,6 +19,25 @@ const Page = ({ tag }) => {
   const [page, setPage] = useState(null)
   const [currentMenuItem, setCurrentMenuItem] = useState(null)
   const [isImgLoaded, setIsImgLoaded] = useState(false)
+
+  const pageContent = useRef(null)
+  const contentWidth =
+    pageContent.current != null ? pageContent.current.offsetWidth : 0
+
+  useEffect(() => {
+    if (isImgLoaded && page != null && contentWidth > 0) {
+      console.log(pageContent.current)
+      pageContent.current.children.forEach((elt) => {
+        const style = window.getComputedStyle(elt)
+        const marginLeft = parseInt(style.marginLeft, 10)
+        if (elt.offsetWidth + marginLeft > contentWidth) {
+          console.log(elt.offsetWidth)
+          console.log(parseInt(style.marginLeft, 10))
+          elt.style.marginLeft = '0px'
+        }
+      })
+    }
+  }, [pageContent, isImgLoaded, page, contentWidth])
 
   useEffect(() => {
     setPage(pagesFilter(tag))
@@ -75,13 +94,13 @@ const Page = ({ tag }) => {
       {isImgLoaded && (
         <>
           {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}
-          <div className="page-content">
-            {page != null && (
-              <>
-                <div dangerouslySetInnerHTML={{ __html: getContent() }}></div>
-              </>
-            )}
-          </div>
+          {page != null && (
+            <div
+              ref={pageContent}
+              className="page-content"
+              dangerouslySetInnerHTML={{ __html: getContent() }}
+            ></div>
+          )}
         </>
       )}
     </div>
