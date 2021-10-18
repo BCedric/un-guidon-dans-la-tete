@@ -8,7 +8,6 @@
   }
 
   img {
-    max-width: 100%;
     height: auto !important;
     &:not(.icon):not(.page-heading-img) {
       border: 1px solid black;
@@ -79,6 +78,9 @@
   }
 
   .page-content {
+    & > * {
+      max-width: 100%;
+    }
     padding: 1em 2em;
 
     @media screen and (max-width: 768px) {
