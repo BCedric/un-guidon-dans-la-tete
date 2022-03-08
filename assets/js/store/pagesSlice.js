@@ -38,7 +38,6 @@ export const fetchPages = (dispatch) => {
 
 export const postPage = (page, dispatch) =>
   Http.post(pageApi.pages(), page).then((pages) => {
-    console.log(pages)
     dispatch(setPages(pages))
   })
 
