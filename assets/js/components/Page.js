@@ -7,6 +7,8 @@ import { getPageByTag } from 'store/pagesSlice'
 import { getMenuItems } from 'store/menuSlice'
 import { getInfos } from 'store/infosSlice'
 import MobileWorkshopsCalendar from './MobileWorkshopsCalendar'
+import BikeIcon from 'imgs/bike-icon.svg'
+// import BikeIcon from 'imgs/bike-icon2.svg'
 
 const Page = ({ tag }) => {
   const componentsTranslations = {
@@ -41,6 +43,7 @@ const Page = ({ tag }) => {
   }, [])
 
   useEffect(() => {
+    console.log(page)
     if (page != null && page.headingImg != null) {
       setIsImgLoaded(false)
     } else {
@@ -88,6 +91,12 @@ const Page = ({ tag }) => {
           />
         </div>
       )}
+      <img
+        src={BikeIcon}
+        className={`background-bike ${
+          page != null && page.headingImg != null ? 'head-img' : ''
+        }`}
+      />
       {isImgLoaded && (
         <>
           {currentMenuItem != null && <h1>{currentMenuItem.name} </h1>}

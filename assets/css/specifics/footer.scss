@@ -7,4 +7,8 @@ footer {
   & > *:nth-child(n-1) {
     margin-right: 0.5em;
   }
+
+  img {
+    border: none !important;
+  }
 }

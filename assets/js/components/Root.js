@@ -15,6 +15,7 @@ import { getHasFetchInfos, fetchInfos } from 'store/infosSlice'
 
 import Router from './Router'
 import Footer from './Footer'
+import Menu from './Menu'
 
 const Root = () => {
   const dispatch = useDispatch()
@@ -46,11 +47,14 @@ const Root = () => {
         <div className="app-root">
           <Messages />
           <HashRouter>
-            <Router isMenuFixe={isMenuFixe}>
-              <Header isMenuFixe={isMenuFixe}></Header>
-            </Router>
+            <div className="menu-content-container">
+              <Menu />
+              <Router isMenuFixe={isMenuFixe}>
+                {/* <Header isMenuFixe={isMenuFixe}></Header> */}
+                <Footer></Footer>
+              </Router>
+            </div>
           </HashRouter>
-          <Footer></Footer>
         </div>
       )}
     </div>

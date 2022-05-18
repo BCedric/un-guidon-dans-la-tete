@@ -7,8 +7,6 @@ import { getMenuItems } from 'store/menuSlice'
 
 import SideMenu from 'generics/components/SideMenu'
 
-import Menu from './Menu'
-
 import logo from 'imgs/logo.png'
 
 const Header = ({ isMenuFixe = false }) => {
@@ -20,7 +18,6 @@ const Header = ({ isMenuFixe = false }) => {
       <Link className="header-img" to={`/`}>
         <img src={logo} />
       </Link>
-      <Menu className={isMenuFixe ? 'fixe' : ''} />
     </div>
   )
 }

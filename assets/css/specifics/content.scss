@@ -1,7 +1,9 @@
 .content {
-  display: flex;
-  flex-direction: row;
   flex: 1;
+  margin-left: 5vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   iframe {
     max-width: 100%;
@@ -70,22 +72,46 @@
   .page-container {
     display: flex;
     flex-direction: column;
-    width: $contentWidth;
+    flex: 1;
     background-color: $backgroundColor;
     @media screen and (max-width: 768px) {
       width: 100%;
     }
+
+    .background-bike {
+      transform: scale(-2, 2) rotate(-20deg);
+      overflow: hidden;
+      border: none !important;
+      filter: invert(88%) sepia(55%) saturate(2873%) hue-rotate(312deg)
+        brightness(101%) contrast(97%);
+      position: absolute;
+      width: 20%;
+      right: -5%;
+      top: 50%;
+      stroke: transparent;
+      stroke-width: 0px;
+      &.head-img {
+        top: calc(50% + 500px);
+      }
+    }
   }
 
   .page-content {
+    z-index: 2;
+    padding: 0 8%;
     & > * {
       max-width: 100%;
     }
-    padding: 1em 2em;
+    // padding: 1em 2em;
 
     @media screen and (max-width: 768px) {
       padding: 1em 1em;
     }
     height: 100%;
   }
+}
+
+.menu-content-container {
+  display: flex;
+  flex-direction: row;
 }

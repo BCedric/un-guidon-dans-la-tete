@@ -6,6 +6,9 @@ import { getPages } from 'store/pagesSlice'
 import { getMenuItems } from 'store/menuSlice'
 import useWindowDimensions from 'generics/hooks/useWindowDimensions'
 
+import logoLRT from 'imgs/logoLRT.png'
+import logoLRTmin from 'imgs/logoLRTmin.png'
+
 const Menu = ({ className }) => {
   const pages = useSelector(getPages)
   const [tags, setTags] = useState([])
@@ -34,7 +37,7 @@ const Menu = ({ className }) => {
     ) : (
       <li key={index}>
         <span>{item.name}</span>
-        <span className="material-icons">expand_more</span>
+        <span className="material-icons">chevron_right</span>
         <ul>
           {item.children.map((child, index) => renderItem(child, index, item))}
         </ul>
@@ -60,25 +63,22 @@ const Menu = ({ className }) => {
   }
 
   return (
-    <div>
-      <div className="bike-icon-container">
-        <span className="material-icons bike-icon">directions_bike</span>
-      </div>
-      <nav className={className}>
-        <ul className="first-level">
-          {isSmallScreen ? (
-            <span
-              className="sidemenu-toggle clickable material-icons"
-              onClick={toggleSideMenu}
-            >
-              menu
-            </span>
-          ) : (
-            menuItems.map((item, index) => renderItem(item, index, null))
-          )}
-        </ul>
-      </nav>
-    </div>
+    <nav className={className}>
+      <img className="logoLRTmin" alt="logoLRTmin" src={logoLRTmin} />
+      <img className="logoLRT" alt="logoLRT" src={logoLRT} />
+      <ul className="first-level">
+        {isSmallScreen ? (
+          <span
+            className="sidemenu-toggle clickable material-icons"
+            onClick={toggleSideMenu}
+          >
+            menu
+          </span>
+        ) : (
+          menuItems.map((item, index) => renderItem(item, index, null))
+        )}
+      </ul>
+    </nav>
   )
 }
 

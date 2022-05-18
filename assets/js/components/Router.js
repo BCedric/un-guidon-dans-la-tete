@@ -30,9 +30,7 @@ const Router = (props) => {
 
   return (
     <>
-      {props.children}
       <div className={`content ${props.isMenuFixe ? 'menu-fixed' : ''}`}>
-        {!isInAdmin && !isSmallScreen && <div className="margin-left"></div>}
         <Switch>
           {pages.length > 0 && (
             <Route
@@ -57,7 +55,7 @@ const Router = (props) => {
             ></Route>
           ))}
         </Switch>
-        {!isInAdmin && !isSmallScreen && <div className="margin-right"></div>}
+        {props.children}
       </div>
     </>
   )

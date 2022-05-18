@@ -19,10 +19,15 @@ body {
   cursor: url('../imgs/rsz_92602.png') 4 12, auto;
   background-color: $sideColor;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .app-root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+a {
+  outline: none;
 }
