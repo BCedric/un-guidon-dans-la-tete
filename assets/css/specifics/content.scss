@@ -12,6 +12,7 @@
     &:not(.icon):not(.page-heading-img) {
       border: 1px solid black;
     }
+    max-width: 100%;
   }
 
   &.menu-fixed {
