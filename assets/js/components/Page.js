@@ -26,13 +26,13 @@ const Page = ({ tag }) => {
 
   useEffect(() => {
     if (isImgLoaded && page != null && contentWidth > 0) {
-      pageContent.current.children.forEach((elt) => {
+      for (let elt of pageContent.current.children) {
         const style = window.getComputedStyle(elt)
         const marginLeft = parseInt(style.marginLeft, 10)
         if (elt.offsetWidth + marginLeft > contentWidth) {
           elt.style.marginLeft = '0px'
         }
-      })
+      }
     }
   }, [pageContent, isImgLoaded, page, contentWidth])
 
