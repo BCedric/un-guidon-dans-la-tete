@@ -6,37 +6,31 @@ use App\Repository\MobileWorkshopRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=MobileWorkshopRepository::class)
- */
+
+#[ORM\Entity(repositoryClass:MobileWorkshopRepository::class)]
 class MobileWorkshop
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:"integer")]
+        private $id;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $startDate;
+    
+    #[ORM\Column(type:"datetime")]
+        private $startDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $endDate;
+    
+    #[ORM\Column(type:"datetime")]
+        private $endDate;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $place;
+    
+    #[ORM\Column(type:"string", length:255)]
+        private $place;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $eventName;
+    
+    #[ORM\Column(type:"string", length:255)]
+        private $eventName;
 
     public function setMobileWorkshop(array $props)
     {

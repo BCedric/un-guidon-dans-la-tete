@@ -12,9 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @Route("/menu")
- */
+
+#[Route("/menu")]
 class MenuItemController extends AbstractController
 {
 
@@ -25,19 +24,19 @@ class MenuItemController extends AbstractController
         $this->normalizer = $normalizer;
     }
 
-    /**
-     * @Route("", name="get_menu_items", methods={"GET"})
-     */
+
+    #[Route("", name: "get_menu_items", methods: ["GET"])]
     public function index(MenuItemRepository $menuItemRepository)
     {
-        return new JsonResponse($this->normalizer->normalize($menuItemRepository->findBy([], ['position' => 'ASC']), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return new JsonResponse($this->normalizer->normalize($menuItemRepository->findBy([], ['position' => 'ASC']), null, [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]));
     }
 
-    /**
-     * @Route("", name="post_menu_item", methods={"POST"})
-     */
+
+    #[Route("", name: "post_menu_item", methods: ["POST"])]
     public function createPage(Request $request, EntityManagerInterface $em, MenuItemRepository $menuItemRepository, PageRepository $pageRepository)
     {
         $body = json_decode($request->getContent(), true);
@@ -49,9 +48,8 @@ class MenuItemController extends AbstractController
         return $this->index($menuItemRepository);
     }
 
-    /**
-     * @Route("/{id}", name="delete_menu_item", methods={"DELETE"})
-     */
+
+    #[Route("/{id}", name: "delete_menu_item", methods: ["DELETE"])]
     public function deletePage(string $id, EntityManagerInterface $em, MenuItemRepository $menuItemRepository)
     {
         $menuItem = $menuItemRepository->findOneBy(['id' => $id]);
@@ -60,9 +58,8 @@ class MenuItemController extends AbstractController
         return $this->index($menuItemRepository);
     }
 
-    /**
-     * @Route("/{id}", name="put_menu_item", methods={"PUT"})
-     */
+
+    #[Route("/{id}", name: "put_menu_item", methods: ["PUT"])]
     public function updatePage(string $id, Request $request, EntityManagerInterface $em, MenuItemRepository $menuItemRepository, PageRepository $pageRepository)
     {
         $menuItem = $menuItemRepository->findOneBy(['id' => $id]);

@@ -15,11 +15,13 @@ const Footer = () => {
 
   return (
     <footer>
-      {!isSmallScreen && <span>{phone.value}</span>}
-      <a href={facebook.value} target="_blank">
-        <img src="https://img.icons8.com/ios-glyphs/30/000000/facebook-circled--v1.png" />
-      </a>
-      {!isSmallScreen && <span>{mail.value}</span>}
+      {!isSmallScreen && phone != null && <span>{phone.value}</span>}
+      {facebook != null && (
+        <a href={facebook.value} target="_blank">
+          <img src="https://img.icons8.com/ios-glyphs/30/000000/facebook-circled--v1.png" />
+        </a>
+      )}
+      {!isSmallScreen && mail && <span>{mail.value}</span>}
     </footer>
   )
 }

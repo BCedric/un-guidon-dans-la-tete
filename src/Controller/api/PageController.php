@@ -12,9 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @Route("/page")
- */
+
+#[Route("/page")]
 class PageController extends AbstractController
 {
     private $normalizer;
@@ -24,9 +23,8 @@ class PageController extends AbstractController
         $this->normalizer = $normalizer;
     }
 
-    /**
-     * @Route("/tags", name="get_tags", methods={"GET"})
-     */
+
+    #[Route("/tags", name: "get_tags", methods: ["GET"])]
     public function getTags(PageRepository $pageRepository)
     {
         $pages = $pageRepository->findAll();
@@ -37,20 +35,20 @@ class PageController extends AbstractController
         return new JsonResponse($tags);
     }
 
-    /**
-     * @Route("", name="get_pages", methods={"GET"})
-     */
+
+    #[Route("", name: "get_pages", methods: ["GET"])]
     public function index(PageRepository $pageRepository)
     {
         $pages = $pageRepository->findBy([], ['tag' => 'ASC']);
-        return new JsonResponse($this->normalizer->normalize($pages, null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return new JsonResponse($this->normalizer->normalize($pages, null, [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]));
     }
 
-    /**
-     * @Route("", name="post_page", methods={"POST"})
-     */
+
+    #[Route("", name: "post_page", methods: ["POST"])]
     public function createPage(Request $request, EntityManagerInterface $em, PageRepository $pageRepository, MediaRepository $mediaRepository)
     {
         $body = json_decode($request->getContent(), true);
@@ -63,9 +61,8 @@ class PageController extends AbstractController
         return $this->index($pageRepository);
     }
 
-    /**
-     * @Route("/{id}", name="put_page", methods={"PUT"})
-     */
+
+    #[Route("/{id}", name: "put_page", methods: ["PUT"])]
     public function updatePage(string $id, Request $request, EntityManagerInterface $em, PageRepository $pageRepository, MediaRepository $mediaRepository)
     {
         $body = json_decode($request->getContent(), true);
@@ -80,9 +77,8 @@ class PageController extends AbstractController
 
     }
 
-    /**
-     * @Route("/{id}", name="delete_page", methods={"DELETE"})
-     */
+
+    #[Route("/{id}", name: "delete_page", methods: ["DELETE"])]
     public function deletePage(string $id, EntityManagerInterface $em, PageRepository $pageRepository)
     {
         $page = $pageRepository->findOneBy(['id' => $id]);

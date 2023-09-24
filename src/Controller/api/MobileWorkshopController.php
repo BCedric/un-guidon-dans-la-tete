@@ -11,9 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @Route("/mobile-workshop")
- */
+
+#[Route("/mobile-workshop")]
 class MobileWorkshopController extends AbstractController
 {
     private $normalizer;
@@ -23,28 +22,29 @@ class MobileWorkshopController extends AbstractController
         $this->normalizer = $normalizer;
     }
 
-    /**
-     * @Route("", name="get_mobile_workshop", methods={"GET"})
-     */
+
+    #[Route("", name: "get_mobile_workshop", methods: ["GET"])]
     public function index(MobileWorkshopRepository $mobileWorkshopRepository)
     {
-        return new JsonResponse($this->normalizer->normalize($mobileWorkshopRepository->findBy([], ['startDate' => 'DESC']), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
-    }
-    /**
-     * @Route("/coming", name="get_coming_mobile_workshop", methods={"GET"})
-     */
-    public function getComingWorkshops(MobileWorkshopRepository $mobileWorkshopRepository)
-    {
-        return new JsonResponse($this->normalizer->normalize($mobileWorkshopRepository->findComingWorkshops(), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return new JsonResponse($this->normalizer->normalize($mobileWorkshopRepository->findBy([], ['startDate' => 'DESC']), null, [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]));
     }
 
-    /**
-     * @Route("", name="post_mobile_workshop", methods={"POST"})
-     */
+    #[Route("/coming", name: "get_coming_mobile_workshop", methods: ["GET"])]
+    public function getComingWorkshops(MobileWorkshopRepository $mobileWorkshopRepository)
+    {
+        return new JsonResponse($this->normalizer->normalize($mobileWorkshopRepository->findComingWorkshops(), null, [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]));
+    }
+
+
+    #[Route("", name: "post_mobile_workshop", methods: ["POST"])]
     public function create(Request $request, EntityManagerInterface $em, MobileWorkshopRepository $mobileWorkshopRepository)
     {
         $body = json_decode($request->getContent(), true);
@@ -55,9 +55,8 @@ class MobileWorkshopController extends AbstractController
         return $this->index($mobileWorkshopRepository);
     }
 
-    /**
-     * @Route("/{id}", name="put_mobile_workshop", methods={"PUT"})
-     */
+
+    #[Route("/{id}", name: "put_mobile_workshop", methods: ["PUT"])]
     public function update(string $id, Request $request, EntityManagerInterface $em, MobileWorkshopRepository $mobileWorkshopRepository)
     {
         $body = json_decode($request->getContent(), true);
@@ -67,9 +66,8 @@ class MobileWorkshopController extends AbstractController
         return $this->index($mobileWorkshopRepository);
     }
 
-    /**
-     * @Route("/{id}", name="delete_mobile_workshop", methods={"DELETE"})
-     */
+
+    #[Route("/{id}", name: "delete_mobile_workshop", methods: ["DELETE"])]
     public function delete(string $id, EntityManagerInterface $em, MobileWorkshopRepository $mobileWorkshopRepository)
     {
         $workshop = $mobileWorkshopRepository->findOneBy(['id' => $id]);

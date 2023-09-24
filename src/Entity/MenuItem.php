@@ -7,43 +7,36 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 
-/**
- * @ORM\Entity(repositoryClass=MenuItemRepository::class)
- */
+
+#[ORM\Entity(repositoryClass: MenuItemRepository::class)]
 class MenuItem
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Page::class)
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+
+    #[ORM\ManyToOne(targetEntity: Page::class)]
+    #[ORM\JoinColumn(name: "page_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private $page;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=MenuItem::class, inversedBy="children")
-     */
+
+    #[ORM\ManyToOne(targetEntity: MenuItem::class, inversedBy: "children")]
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MenuItem::class, mappedBy="parent")
-     * @OrderBy({"position" = "ASC"})
-     */
+
+    #[ORM\OneToMany(targetEntity: MenuItem::class, mappedBy: "parent")]
+    #[OrderBy(["position" => "ASC"])]
     private $children;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+
+    #[ORM\Column(type: "integer", nullable: true)]
     private $position;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
     public function __construct()
@@ -81,9 +74,7 @@ class MenuItem
         return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
+
     public function getChildren(): Collection
     {
         return $this->children;

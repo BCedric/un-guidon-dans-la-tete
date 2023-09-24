@@ -14,9 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @Route("/media")
- */
+
+#[Route("/media")]
 class MediaController extends AbstractController
 {
     private $normalizer;
@@ -27,19 +26,19 @@ class MediaController extends AbstractController
         $this->normalizer = $normalizer;
     }
 
-    /**
-     * @Route("", name="get_medias", methods={"GET"})
-     */
+
+    #[Route("", name: "get_medias", methods: ["GET"])]
     public function index(MediaRepository $mediaRepository)
     {
-        return new JsonResponse($this->normalizer->normalize($mediaRepository->findBy([], ['filename' => 'ASC']), null, ['circular_reference_handler' => function ($object) {
-            return $object->getId();
-        }]));
+        return new JsonResponse($this->normalizer->normalize($mediaRepository->findBy([], ['filename' => 'ASC']), null, [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]));
     }
 
-    /**
-     * @Route("/{filename}", name="get_media_by_filename", methods={"GET"})
-     */
+
+    #[Route("/{filename}", name: "get_media_by_filename", methods: ["GET"])]
     public function getByFilename(string $filename, MediaRepository $mediaRepository)
     {
         $filePath = $this->directory . '/' . $filename;
@@ -49,9 +48,8 @@ class MediaController extends AbstractController
         return $response;
     }
 
-    /**
-     * @Route("/{id}", name="delete_media", methods={"DELETE"})
-     */
+
+    #[Route("/{id}", name: "delete_media", methods: ["DELETE"])]
     public function delete(string $id, MediaRepository $mediaRepository, EntityManagerInterface $em)
     {
         $media = $mediaRepository->findOneBy(['id' => $id]);
@@ -64,9 +62,8 @@ class MediaController extends AbstractController
         return $this->index($mediaRepository);
     }
 
-    /**
-     * @Route("", name="post_media", methods={"POST"})
-     */
+
+    #[Route("", name: "post_media", methods: ["POST"])]
     public function post(Request $request, MediaRepository $mediaRepository, EntityManagerInterface $em)
     {
         $media = new Media();
@@ -88,9 +85,8 @@ class MediaController extends AbstractController
         return $this->index($mediaRepository);
     }
 
-    /**
-     * @Route("/{id}", name="put_media", methods={"PUT"})
-     */
+
+    #[Route("/{id}", name: "put_media", methods: ["PUT"])]
     public function put(string $id, Request $request, MediaRepository $mediaRepository, EntityManagerInterface $em)
     {
         $body = json_decode($request->getContent(), true);

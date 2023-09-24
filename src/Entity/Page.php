@@ -5,37 +5,30 @@ namespace App\Entity;
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PageRepository::class)
- */
+
+#[ORM\Entity(repositoryClass: PageRepository::class)]
 class Page
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+
+    #[ORM\Column(type: "string", length: 255)]
     private $tag;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+
+    #[ORM\Column(type: "text")]
     private $content;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Media::class)
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+
+    #[ORM\ManyToOne(targetEntity: Media::class)]
+    #[ORM\JoinColumn(name: "media_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private $headingImg;
 
-    /**
-     * @ORM\Column(type="integer", nullable=false, options={"default" : 50})
-     */
+    #[ORM\Column(type: "integer", nullable: false, options: ["default" => 50])]
     private $headingImgPosition;
 
     public function setPage(array $props)

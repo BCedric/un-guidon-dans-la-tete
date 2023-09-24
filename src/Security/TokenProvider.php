@@ -28,16 +28,14 @@ class TokenProvider implements UserProviderInterface
     /**
      * @return UserInterface
      *
-     * @throws UserNotFoundException
-     *
      * @deprecated since Symfony 5.3, use loadUserByIdentifier() instead
      */
-    public function loadUserByUsername(string $username)
+    public function loadUserByUsername(string $username): UserInterface
     {
         return new InMemoryUser($username, null);
     }
 
-    public function loadUserByIdentifier(string $identifier)
+    public function loadUserByIdentifier(string $identifier): UserInterface
     {
         return new InMemoryUser('token_user', null);
     }
