@@ -12,8 +12,7 @@ const menuAdminItems = [
   { component: PagesAdmin, label: 'Pages' },
   { component: MediaAdmin, label: 'Media' },
   { component: MenuAdmin, label: 'Menu' },
-  { component: InfosAdmin, label: 'Infos générales' },
-  { component: MobileWorkshopsAdmin, label: 'Ateliers mobiles' }
+  { component: InfosAdmin, label: 'Infos générales' }
 ]
 
 const Admin = () => {

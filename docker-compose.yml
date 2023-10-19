@@ -1,0 +1,51 @@
+version: '3'
+services:
+  db:
+    image: mariadb:${DB_TAG}
+    container_name: db_secu_sociale_mort
+    volumes:
+      - /data/secu-sociale-mort/db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - '${DB_PORT}:3306'
+    networks:
+      - localNetwork
+
+  www:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: www_secu_sociale_mort
+    volumes:
+      - ./:/var/www/html/
+    environment:
+      APP_ENV: ${APP_ENV}
+      TZ: Europe/Paris
+    ports:
+      - 80:80
+    networks:
+      - localNetwork
+      - webgateway
+
+  node:
+    image: node:${NODE_TAG}
+    container_name: node_secu_sociale_mort
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html/
+    command: ['npm', 'run', 'watch']
+
+  mail:
+    image: maildev/maildev
+    container_name: maildev_secu_sociale_mort
+
+networks:
+  webgateway:
+    external: true
+  localNetwork:
+    name: conventions_net
+    driver: bridge

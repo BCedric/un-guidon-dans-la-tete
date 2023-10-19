@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { getPages } from 'store/pagesSlice'
 import { getMenuItems } from 'store/menuSlice'
 import useWindowDimensions from 'generics/hooks/useWindowDimensions'
+import logo from '../../imgs/collectif-secu-mort-logo100.png'
 
 const Menu = ({ className }) => {
   const pages = useSelector(getPages)
@@ -61,10 +62,10 @@ const Menu = ({ className }) => {
 
   return (
     <div>
-      <div className="bike-icon-container">
-        <span className="material-icons bike-icon">directions_bike</span>
-      </div>
-      <nav className={className}>
+      {/* <div className="bike-icon-container">
+        <img src={logo} />
+      </div> */}
+      <nav id="menu" className={className}>
         <ul className="first-level">
           {isSmallScreen ? (
             <span

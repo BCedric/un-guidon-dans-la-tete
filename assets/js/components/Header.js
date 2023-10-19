@@ -9,13 +9,13 @@ import SideMenu from 'generics/components/SideMenu'
 
 import Menu from './Menu'
 
-import logo from 'imgs/logo.png'
+import logo from 'imgs/logo_collectif.png'
 
 const Header = ({ isMenuFixe = false }) => {
   const menuItems = useSelector(getMenuItems)
 
   return (
-    <div className="header">
+    <div id="header" className="header">
       <SideMenu menu={menuItems} />
       <Link className="header-img" to={`/`}>
         <img src={logo} />

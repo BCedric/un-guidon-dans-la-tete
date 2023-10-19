@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
 import { useSelector } from 'react-redux'
-import { getPageByTag } from 'store/pagesSlice'
-import { getMenuItems } from 'store/menuSlice'
 import { getInfos } from 'store/infosSlice'
+import { getMenuItems } from 'store/menuSlice'
+import { getPageByTag } from 'store/pagesSlice'
 import MobileWorkshopsCalendar from './MobileWorkshopsCalendar'
 
 const Page = ({ tag }) => {
